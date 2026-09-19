@@ -1,5 +1,7 @@
 ### [Nombre del juego]
 
-* Integrante 1
-* Integrante 2
-* Etc...
+* Yago Vanzetta
+* Julián Pampín
+* Catalina Fernandez Presedo
+* Mateo Speciali
+* Reynnier Arellano
