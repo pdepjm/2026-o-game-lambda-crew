@@ -36,6 +36,7 @@ object helado {
     if (fruta.esUnaFruta()) {
     game.removeVisual(fruta)
     puntos += 100
+    puntaje.cambiar(puntos)
     }
   }
 
@@ -47,6 +48,15 @@ object fruta {
   var property position = game.at(11,5)
 
   method esUnaFruta() = true
+}
+
+object puntaje {
+  var puntos = 0
+  method position() = game.at(14,14)
+  method text() = ("Puntos: "+ puntos.toString())
+  method cambiar(punt) {
+    puntos = punt
+  }
 }
 
 object pared {

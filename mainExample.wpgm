@@ -15,6 +15,7 @@ program juego {
 	game.addVisual(pared)
 	game.addVisual(enemigo)
 	game.addVisual(fruta)
+	game.addVisual(puntaje)
 	
 	tick.start()
 
