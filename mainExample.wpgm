@@ -24,7 +24,7 @@ program juego {
 	keyboard.up().onPressDo{helado.subir()}
 	keyboard.down().onPressDo{helado.bajar()}
 
-	game.onCollideDo(helado, {fruta => helado.comer(fruta)})
+	game.onCollideDo(helado, {elemento => helado.comer(elemento)})
 
 	game.start()
 }
