@@ -15,21 +15,20 @@ object helado {
   method image() = "placeholders/helado.jpeg"
 
   method subir() {
-    position = position.up(1)
+    self.moverA(position.up(1))
   }
-
+  
   method bajar() {
-    position = position.down(1)
+    self.moverA(position.down(1))
   }
-
+  
   method derecha() {
-    position = position.right(1)
+    self.moverA(position.right(1))
   }
-
+  
   method izquierda() {
-    position = position.left(1)
+    self.moverA(position.left(1))
   }
-
   // este method sin el if hace que el helado coma ABSOLUTAMENTE TODO (sin discriminar). Prueba de polimorfismo (?
   // tuve que añadir el method esUnaFruta para definir la interfaz de una fruta. Supongo que en el futuro fruta tendrá una mejor interfaz
   method comer(fruta) {
@@ -39,6 +38,11 @@ object helado {
     puntaje.cambiar(puntos)
     }
   }
+method moverA(destino) {
+  if (destino != pared.position()) {
+    position = destino
+  }
+}
 
 }
 
