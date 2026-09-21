@@ -81,7 +81,7 @@ object pared {
 
 object enemigo {
   method image() = "placeholders/enemigo.jpg" 
-  var property position = game.at(1,15)
+  var property position = game.at(1,13)
 
   method esUnaFruta() = false
   method move() {
