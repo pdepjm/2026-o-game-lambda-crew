@@ -29,6 +29,7 @@ object helado {
   method izquierda() {
     self.moverA(position.left(1))
   }
+
   // este method sin el if hace que el helado coma ABSOLUTAMENTE TODO (sin discriminar). Prueba de polimorfismo (?
   // tuve que añadir el method esUnaFruta para definir la interfaz de una fruta. Supongo que en el futuro fruta tendrá una mejor interfaz
   method comer(fruta) {
@@ -38,8 +39,15 @@ object helado {
     puntaje.cambiar(puntos)
     }
   }
+
 method moverA(destino) {
-  if (destino != pared.position()) {
+  if (
+    destino != pared.position() &&
+    destino.x() >= 0 &&
+    destino.x() < game.width() &&
+    destino.y() >= 0 &&
+    destino.y() < game.height()
+  ) {
     position = destino
   }
 }
