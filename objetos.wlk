@@ -1,10 +1,18 @@
-object pepita {
-  var energy = 100
+object creadorDeFrutas {
 
-  method energy() = energy
+  method crearFrambuesas() {
+    const limiteX = game.width() - 1
+    const limiteY = game.height() - 1
 
-  method fly(minutes) {
-    energy = energy - minutes * 3
+    (0..limiteX).forEach { posicionEnX =>
+      (0..limiteY).forEach { posicionEnY =>
+        
+        if (posicionEnY.odd() && posicionEnX.even()) {
+          game.addVisual(new Frambuesa(x = posicionEnX, y = posicionEnY))
+        }
+        
+      }
+    }
   }
 }
 
@@ -35,8 +43,7 @@ object helado {
   method comer(fruta) {
     if (fruta.esUnaFruta()) {
     game.removeVisual(fruta)
-    puntos += 100
-    puntaje.cambiar(puntos)
+    puntaje.sumarPuntos(fruta.puntosOtorgados())
     }
   }
 
@@ -54,20 +61,23 @@ method moverA(destino) {
 
 }
 
-object fruta {
-  method image() = "placeholders/fruta.jpg"
+class Frambuesa {
+  method image() = "placeholders/frambuesa.jpg"
 
-  var property position = game.at(11,5)
-
+  var x
+  var y
+  var property position = game.at(x,y)
+  method puntosOtorgados () = 100
   method esUnaFruta() = true
 }
 
 object puntaje {
   var puntos = 0
   method position() = game.at(14,14)
-  method text() = ("Puntos: "+ puntos.toString())
-  method cambiar(punt) {
-    puntos = punt
+  method text() = ("Puntos: "+ self.puntos())
+  method puntos() = puntos
+  method sumarPuntos(punt) {
+    puntos += punt
   }
 }
 

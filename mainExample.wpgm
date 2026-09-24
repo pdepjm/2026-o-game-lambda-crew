@@ -14,7 +14,6 @@ program juego {
 	game.addVisual(helado)
 	game.addVisual(pared)
 	game.addVisual(enemigo)
-	game.addVisual(fruta)
 	game.addVisual(puntaje)
 	
 	tick.start()
@@ -26,5 +25,7 @@ program juego {
 
 	game.onCollideDo(helado, {elemento => helado.comer(elemento)})
 
+	creadorDeFrutas.crearFrambuesas()
+	
 	game.start()
 }
