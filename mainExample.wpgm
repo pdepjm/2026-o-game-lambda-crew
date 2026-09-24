@@ -4,7 +4,7 @@ import objetos.*
 
 program juego {
 	
-	const tick = game.tick(1000, { enemigo.move() }, false)
+	const tick = game.tick(666, { manejadorDeEnemigos.moverEnemigos() }, false)
 
 	game.cellSize(100)
 	game.title("Pepita")
@@ -13,7 +13,6 @@ program juego {
 	game.ground("placeholders/suelo.jpg")
 	game.addVisual(helado)
 	game.addVisual(pared)
-	game.addVisual(enemigo)
 	game.addVisual(puntaje)
 	
 	tick.start()
@@ -26,6 +25,7 @@ program juego {
 	game.onCollideDo(helado, {elemento => helado.comer(elemento)})
 
 	creadorDeFrutas.crearFrambuesas()
+	manejadorDeEnemigos.crearEnemigosMovRect()
 	
 	game.start()
 }

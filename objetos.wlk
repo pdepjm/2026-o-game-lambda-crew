@@ -16,6 +16,34 @@ object creadorDeFrutas {
   }
 }
 
+object manejadorDeEnemigos {
+
+    const listaDeEnemigos = []
+    // En primera instancia quería hacer addVisual y add enemigo a lista de enemigos todo junto, pero por errores en wollok
+    // lo tuve que hacer todo separado y queda muy largo el method. Es lo que hay por ahora
+    method crearEnemigosMovRect () {
+
+      const enemigo1 = new Enemigo (x=0,lix=0,lsx=14,y=14,liy=0,lsy=14)
+      const enemigo2 = new Enemigo (x=14,lix=0,lsx=14,y=0,liy=0,lsy=14)
+      const enemigo3 = new Enemigo (x=4,lix=4,lsx=10,y=10,liy=4,lsy=10)
+      const enemigo4 = new Enemigo (x=10,lix=4,lsx=10,y=4,liy=4,lsy=10)
+
+      game.addVisual (enemigo1)
+      game.addVisual (enemigo2)
+      game.addVisual (enemigo3)
+      game.addVisual (enemigo4)
+
+      listaDeEnemigos.add(enemigo1)
+      listaDeEnemigos.add(enemigo2)
+      listaDeEnemigos.add(enemigo3)
+      listaDeEnemigos.add(enemigo4)
+    }
+
+    method moverEnemigos () {
+      listaDeEnemigos.forEach{enemigo => enemigo.movete()}
+    }
+}
+
 object helado {
   var property position = game.origin()
   var puntos = 0
@@ -88,17 +116,45 @@ object pared {
 
   method esUnaFruta() = false
 }
-
-object enemigo {
+// Clase de enemigos con movimiento rectangular
+class Enemigo {
   method image() = "placeholders/enemigo.jpg" 
-  var property position = game.at(1,13)
+  var x
+  var y
+  // ls = limite superior
+  var lsy
+  var lsx
+  // li = limite inferior
+  var liy
+  var lix
+  var property position = game.at(x,y)
+  var sentido = "derecha"
 
   method esUnaFruta() = false
-  method move() {
-    const x = 0.randomUpTo(game.width()).truncate(0)
-    const y = 0.randomUpTo(game.height()).truncate(0)
-    position = game.at(x,y)
+
+  method movete () {
+    self.evaluarMovimiento()
+    if (sentido=="abajo") {
+      position = position.down(1)
+    } else if (sentido=="arriba") {
+      position = position.up(1) 
+    } else if (sentido=="derecha") {
+      position = position.right(1) 
+    } else if (sentido=="izquierda") {
+      position = position.left(1) 
+    }
+  }
+
+  method evaluarMovimiento() {
+    if (position == game.at(lsx,lsy)) {
+      sentido = "abajo"
+  } else if (position == game.at(lsx,liy)) {
+      sentido = "izquierda"
+  } else if (position == game.at(lix,lsy)) {
+      sentido = "derecha"
+  } else if (position == game.at(lix,liy)) {
+      sentido = "arriba"
   }
 }
-
+}
 
