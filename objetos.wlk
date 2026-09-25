@@ -53,6 +53,9 @@ object manejadorDeEnemigos {
 object helado {
   var property position = game.origin()
   var puntos = 0
+  var velocidad = 150 
+
+  method velocidad() = velocidad 
 
   method image() = "placeholders/helado.jpeg"
 
