@@ -1,5 +1,7 @@
 object creadorDeFrutas {
 
+  var cantidadDeFrutas = 0
+
   method crearFrambuesas() {
     const limiteX = game.width() - 1
     const limiteY = game.height() - 1
@@ -9,11 +11,15 @@ object creadorDeFrutas {
         
         if (posicionEnY.odd() && posicionEnX.even()) {
           game.addVisual(new Frambuesa(x = posicionEnX, y = posicionEnY))
+          cantidadDeFrutas +=1
         }
         
       }
     }
   }
+
+  method cantidadDeFrutas () = cantidadDeFrutas
+
 }
 
 object manejadorDeEnemigos {
@@ -72,6 +78,7 @@ object helado {
     if (fruta.esUnaFruta()) {
     game.removeVisual(fruta)
     puntaje.sumarPuntos(fruta.puntosOtorgados())
+    cantFrut.sumarFruta()
     }
   }
 
@@ -106,6 +113,16 @@ object puntaje {
   method puntos() = puntos
   method sumarPuntos(punt) {
     puntos += punt
+  }
+}
+
+object cantFrut {
+  var frutas = 0
+  method position() = game.at(0,14)
+  method text() = ("Frutas Comidas: "+ self.frutas() + "/" + creadorDeFrutas.cantidadDeFrutas())
+  method frutas() = frutas
+  method sumarFruta() {
+    frutas += 1
   }
 }
 
