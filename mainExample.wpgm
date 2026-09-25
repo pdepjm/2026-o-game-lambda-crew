@@ -18,10 +18,10 @@ program juego {
 	
 	tick.start()
 
-	keyboard.left().onPressDo{helado.izquierda()}
-	keyboard.right().onPressDo{helado.derecha()}
-	keyboard.up().onPressDo{helado.subir()}
-	keyboard.down().onPressDo{helado.bajar()}
+	keyboard.left().whilePressedDo({helado.izquierda()}, helado.velocidad())
+	keyboard.right().whilePressedDo({helado.derecha()}, helado.velocidad())
+	keyboard.up().whilePressedDo({helado.subir()}, helado.velocidad())
+	keyboard.down().whilePressedDo({helado.bajar()}, helado.velocidad())
 
 	game.onCollideDo(helado, {elemento => helado.comer(elemento)})
 
