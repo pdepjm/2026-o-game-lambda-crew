@@ -10,16 +10,14 @@ object creadorDeFrutas {
       (0..limiteY).forEach { posicionEnY =>
         
         if (posicionEnY.odd() && posicionEnX.even()) {
-          game.addVisual(new Frambuesa(x = posicionEnX, y = posicionEnY))
+          game.addVisual(new Fruta(x = posicionEnX, y = posicionEnY, imagen = "placeholders/frambuesa.jpg"))
           cantidadDeFrutas +=1
         }
-        
       }
     }
   }
 
   method cantidadDeFrutas () = cantidadDeFrutas
-
 }
 
 object manejadorDeEnemigos {
@@ -54,34 +52,66 @@ object helado {
   var property position = game.origin()
   var puntos = 0
   var velocidad = 150 
+  var condicionDeVelocidad = 2
 
-  method velocidad() = velocidad 
+  method velocidad() = velocidad
 
   method image() = "placeholders/helado.jpeg"
 
   method subir() {
-    self.moverA(position.up(1))
+    if (condicionDeVelocidad == 2) {
+      self.moverA(position.up(0.5))
+    } else if (condicionDeVelocidad == 3) {
+      self.moverA(position.up(0.8))
+    } else if (condicionDeVelocidad == 1) {
+      self.moverA(position.up(0.25))
+    }
   }
   
   method bajar() {
-    self.moverA(position.down(1))
+    if (condicionDeVelocidad == 2) {
+      self.moverA(position.down(0.5))
+    } else if (condicionDeVelocidad == 3) {
+      self.moverA(position.down(0.8))
+    } else if (condicionDeVelocidad == 1) {
+      self.moverA(position.down(0.25))
+    }
   }
   
   method derecha() {
-    self.moverA(position.right(1))
+    if (condicionDeVelocidad == 2) {
+      self.moverA(position.right(0.5))
+    } else if (condicionDeVelocidad == 3) {
+      self.moverA(position.right(0.8))
+    } else if (condicionDeVelocidad == 1) {
+      self.moverA(position.right(0.25))
+    }
   }
   
   method izquierda() {
-    self.moverA(position.left(1))
+    if (condicionDeVelocidad == 2) {
+      self.moverA(position.left(0.5))
+    } else if (condicionDeVelocidad == 3) {
+      self.moverA(position.left(0.8))
+    } else if (condicionDeVelocidad == 1) {
+      self.moverA(position.left(0.25))
+    }
+  }
+
+  method cambiarCondicionDeVelocidad(numero) {
+    condicionDeVelocidad = numero
   }
 
   // este method sin el if hace que el helado coma ABSOLUTAMENTE TODO (sin discriminar). Prueba de polimorfismo (?
   // tuve que añadir el method esUnaFruta para definir la interfaz de una fruta. Supongo que en el futuro fruta tendrá una mejor interfaz
-  method comer(fruta) {
-    if (fruta.esUnaFruta()) {
-    game.removeVisual(fruta)
-    puntaje.sumarPuntos(fruta.puntosOtorgados())
+  method consumir(consumible) {
+    if (consumible.esUnaFruta()) {
+    game.removeVisual(consumible)
+    puntaje.sumarPuntos(consumible.puntosOtorgados())
     cantFrut.sumarFruta()
+    } else if (consumible.esUnPowerUp()) {
+      game.removeVisual(consumible)
+      consumible.aplicarEfecto()
     }
   }
 
@@ -99,18 +129,48 @@ method moverA(destino) {
 
 }
 
-class Frambuesa {
-  method image() = "placeholders/frambuesa.jpg"
+class Fruta {
+  var imagen
+  method image() = imagen
 
   var x
   var y
   var property position = game.at(x,y)
   method puntosOtorgados () = 100
   method esUnaFruta() = true
+  method esUnPowerUp () = false
+}
+
+object acelerador {
+  var imagen = "diesel.jpg"
+  method image () = imagen 
+  method esUnPowerUp () = true
+  method esUnaFruta () = false
+
+  var property position = game.at(13,13)
+  method aplicarEfecto () {
+    helado.cambiarCondicionDeVelocidad(3)
+    game.schedule(10000, {helado.cambiarCondicionDeVelocidad(2)})
+  }
+}
+
+object relentizador {
+  var imagen = "copito.jpg"
+  method image () = imagen 
+  method esUnPowerUp () = true
+  method esUnaFruta () = false
+
+  var property position = game.at(6,6)
+  method aplicarEfecto () {
+    helado.cambiarCondicionDeVelocidad(1)
+    game.schedule(10000, {helado.cambiarCondicionDeVelocidad(2)})
+  }
 }
 
 object puntaje {
   var puntos = 0
+  method esUnPowerUp () = false
+  method esUnaFruta () = false
   method position() = game.at(14,14)
   method text() = ("Puntos: "+ self.puntos())
   method puntos() = puntos
@@ -121,6 +181,8 @@ object puntaje {
 
 object cantFrut {
   var frutas = 0
+  method esUnPowerUp () = false
+  method esUnaFruta () = false
   method position() = game.at(0,14)
   method text() = ("Frutas Comidas: "+ self.frutas() + "/" + creadorDeFrutas.cantidadDeFrutas())
   method frutas() = frutas
@@ -135,6 +197,7 @@ object pared {
   var property position = game.center()
 
   method esUnaFruta() = false
+  method esUnPowerUp () = false
 }
 // Clase de enemigos con movimiento rectangular
 class Enemigo {
@@ -151,6 +214,7 @@ class Enemigo {
   var sentido = "derecha"
 
   method esUnaFruta() = false
+  method esUnPowerUp () = false
 
   method movete () {
     self.evaluarMovimiento()
