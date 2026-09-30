@@ -119,9 +119,9 @@ method moverA(destino) {
   if (
     destino != pared.position() &&
     destino.x() >= 0 &&
-    destino.x() < game.width() &&
+    destino.x() < 14.5 &&
     destino.y() >= 0 &&
-    destino.y() < game.height()
+    destino.y() < 14.5
   ) {
     position = destino
   }
