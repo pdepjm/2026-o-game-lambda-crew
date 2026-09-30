@@ -1,4 +1,4 @@
-### [Nombre del juego]
+### [Bad Objects]
 
 * Yago Vanzetta
 * Julián Pampín
