@@ -1,0 +1,47 @@
+import helado.*
+import manejadores.*
+import frutas_y_powerups.*
+import extras.*
+
+// Clase de enemigos con movimiento rectangular
+class EnemigoRectangular {
+  method image() = "placeholders/enemigo.jpg" 
+  var x
+  var y
+  // ls = limite superior
+  var lsy
+  var lsx
+  // li = limite inferior
+  var liy
+  var lix
+  var property position = game.at(x,y)
+  var sentido = "derecha"
+
+  method esUnaFruta() = false
+  method esUnPowerUp () = false
+
+  method movete () {
+    self.evaluarMovimiento()
+    if (sentido=="abajo") {
+      position = position.down(1)
+    } else if (sentido=="arriba") {
+      position = position.up(1) 
+    } else if (sentido=="derecha") {
+      position = position.right(1) 
+    } else if (sentido=="izquierda") {
+      position = position.left(1) 
+    }
+  }
+
+  method evaluarMovimiento() {
+    if (position == game.at(lsx,lsy)) {
+      sentido = "abajo"
+  } else if (position == game.at(lsx,liy)) {
+      sentido = "izquierda"
+  } else if (position == game.at(lix,lsy)) {
+      sentido = "derecha"
+  } else if (position == game.at(lix,liy)) {
+      sentido = "arriba"
+  }
+}
+}
