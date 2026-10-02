@@ -8,7 +8,7 @@ import direcciones.*
 object helado {
   var property position = game.origin()
   var puntos = 0
-  var velocidad = 150 
+  var velocidad = 150
   var condicionDeVelocidad = 2
 
   method position () = position
@@ -33,7 +33,8 @@ object helado {
       consumible.aplicarEfecto()
     }
   }
-    
+    // Creo que este es el método y la forma en la que diana se refería que teníamos que hacer las cosas.
+    // Ahora si, hay un nuevo bug que de vez en cuando el personaje mete turbo sin razón aparente. 
     method moverHacia(direccion) {
         direccion.mover(self)
     }
