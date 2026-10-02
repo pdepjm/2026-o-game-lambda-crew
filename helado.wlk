@@ -2,6 +2,8 @@ import enemigos.*
 import manejadores.*
 import frutas_y_powerups.*
 import extras.*
+import velocidades.*
+import direcciones.*
 
 object helado {
   var property position = game.origin()
@@ -9,49 +11,11 @@ object helado {
   var velocidad = 150 
   var condicionDeVelocidad = 2
 
+  method position () = position
+
   method velocidad() = velocidad
 
   method image() = "placeholders/helado.jpeg"
-
-  method subir() {
-    if (condicionDeVelocidad == 2) {
-      self.moverA(position.up(0.5))
-    } else if (condicionDeVelocidad == 3) {
-      self.moverA(position.up(0.8))
-    } else if (condicionDeVelocidad == 1) {
-      self.moverA(position.up(0.25))
-    }
-  }
-  
-  method bajar() {
-    if (condicionDeVelocidad == 2) {
-      self.moverA(position.down(0.5))
-    } else if (condicionDeVelocidad == 3) {
-      self.moverA(position.down(0.8))
-    } else if (condicionDeVelocidad == 1) {
-      self.moverA(position.down(0.25))
-    }
-  }
-  
-  method derecha() {
-    if (condicionDeVelocidad == 2) {
-      self.moverA(position.right(0.5))
-    } else if (condicionDeVelocidad == 3) {
-      self.moverA(position.right(0.8))
-    } else if (condicionDeVelocidad == 1) {
-      self.moverA(position.right(0.25))
-    }
-  }
-  
-  method izquierda() {
-    if (condicionDeVelocidad == 2) {
-      self.moverA(position.left(0.5))
-    } else if (condicionDeVelocidad == 3) {
-      self.moverA(position.left(0.8))
-    } else if (condicionDeVelocidad == 1) {
-      self.moverA(position.left(0.25))
-    }
-  }
 
   method cambiarCondicionDeVelocidad(numero) {
     condicionDeVelocidad = numero
@@ -69,6 +33,10 @@ object helado {
       consumible.aplicarEfecto()
     }
   }
+    
+    method moverHacia(direccion) {
+        direccion.mover(self)
+    }
 
     method moverA(destino) {
         if (

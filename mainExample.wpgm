@@ -1,6 +1,12 @@
 import wollok.game.*
 
-import objetos.*
+import enemigos.*
+import manejadores.*
+import frutas_y_powerups.*
+import extras.*
+import helado.*
+import direcciones.*
+import velocidades.*
 
 program juego {
 	
@@ -20,10 +26,10 @@ program juego {
 	
 	tick.start()
 
-	keyboard.left().whilePressedDo({helado.izquierda()}, helado.velocidad())
-	keyboard.right().whilePressedDo({helado.derecha()}, helado.velocidad())
-	keyboard.up().whilePressedDo({helado.subir()}, helado.velocidad())
-	keyboard.down().whilePressedDo({helado.bajar()}, helado.velocidad())
+	keyboard.left().whilePressedDo({helado.moverHacia(izquierda)}, helado.velocidad())
+	keyboard.right().whilePressedDo({helado.moverHacia(derecha)}, helado.velocidad())
+	keyboard.up().whilePressedDo({helado.moverHacia(arriba)}, helado.velocidad())
+	keyboard.down().whilePressedDo({helado.moverHacia(abajo)}, helado.velocidad())
 
 	game.onCollideDo(helado, {elemento => helado.consumir(elemento)})
 
