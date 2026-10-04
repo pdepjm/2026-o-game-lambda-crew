@@ -1,9 +1,9 @@
-import example.pepita
+import helado.*
+import direcciones.*
 
-describe "group of tests for pepita" {
-
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
+describe "movimiento del helado" {
+  test "al ir a la derecha avanza una casilla" {
+    helado.moverHacia(derecha)
+    assert.equals(game.at(1, 0), helado.position())
   }
-
 }

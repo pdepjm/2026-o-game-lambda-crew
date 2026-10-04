@@ -18,8 +18,9 @@ class EnemigoRectangular {
   var property position = game.at(x,y)
   var sentido = derecha
 
-  method esUnaFruta() = false
-  method esUnPowerUp () = false
+  method recibirChoqueDe(unHelado) {
+  // pendiente: definir con el grupo qué le pasa al helado
+}
 
   method movete () {
     self.evaluarMovimiento()

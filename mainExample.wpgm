@@ -31,7 +31,7 @@ program juego {
 	keyboard.up().whilePressedDo({helado.moverHacia(arriba)}, helado.velocidad())
 	keyboard.down().whilePressedDo({helado.moverHacia(abajo)}, helado.velocidad())
 
-	game.onCollideDo(helado, {elemento => helado.consumir(elemento)})
+	game.onCollideDo(helado, {elemento => elemento.recibirChoqueDe(helado)})
 
 	creadorDeFrutas.crearFrambuesas()
 	manejadorDeEnemigos.crearEnemigosMovRect()

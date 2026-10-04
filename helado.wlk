@@ -21,18 +21,6 @@ object helado {
     condicionDeVelocidad = numero
   }
 
-  // este method sin el if hace que el helado coma ABSOLUTAMENTE TODO (sin discriminar). Prueba de polimorfismo (?
-  // tuve que añadir el method esUnaFruta para definir la interfaz de una fruta. Supongo que en el futuro fruta tendrá una mejor interfaz
-  method consumir(consumible) {
-    if (consumible.esUnaFruta()) {
-    game.removeVisual(consumible)
-    puntaje.sumarPuntos(consumible.puntosOtorgados())
-    cantFrut.sumarFruta()
-    } else if (consumible.esUnPowerUp()) {
-      game.removeVisual(consumible)
-      consumible.aplicarEfecto()
-    }
-  }
     // Creo que este es el método y la forma en la que diana se refería que teníamos que hacer las cosas.
     // Ahora si, hay un nuevo bug que de vez en cuando el personaje mete turbo sin razón aparente. 
     method moverHacia(direccion) {
