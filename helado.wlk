@@ -10,13 +10,14 @@ object helado {
   var puntos = 0
   var velocidad = 150
   var condicionDeVelocidad = 2
+  var imagen = "placeholders/helado.jpeg"
   var vivo = true
 
   method position () = position
 
   method velocidad() = velocidad
 
-  method image() = "placeholders/helado.jpeg"
+  method image() = imagen
 
   method cambiarCondicionDeVelocidad(numero) {
     condicionDeVelocidad = numero
@@ -44,6 +45,7 @@ object helado {
     method morir() {
      if (vivo) {   
         vivo = false
+        imagen = "placeholders/helado_muerto.jpeg"
         cartelReintentar.mostrar()
     }
     }
