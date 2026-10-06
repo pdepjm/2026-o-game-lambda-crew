@@ -10,6 +10,7 @@ object helado {
   var puntos = 0
   var velocidad = 150
   var condicionDeVelocidad = 2
+  var vivo = true
 
   method position () = position
 
@@ -29,6 +30,7 @@ object helado {
 
     method moverA(destino) {
         if (
+            vivo &&
             destino != pared.position() &&
             destino.x() >= 0 &&
             destino.x() < 14.5 &&
@@ -37,5 +39,19 @@ object helado {
         ) {
             position = destino
         }
+    }
+
+    method morir() {
+     if (vivo) {   
+        vivo = false
+        cartelReintentar.mostrar()
+    }
+    }
+
+// vuelve al principio
+    method reiniciar() {
+        position = game.origin()
+        vivo = true
+        condicionDeVelocidad = 2
     }
 }

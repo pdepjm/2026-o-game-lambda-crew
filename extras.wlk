@@ -15,6 +15,9 @@ object puntaje inherits Ornamental{
   method sumarPuntos(punt) {
     puntos += punt
   }
+  method reiniciar() {
+  puntos = 0
+  }
 }
 
 object cantFrut inherits Ornamental{
@@ -24,6 +27,9 @@ object cantFrut inherits Ornamental{
   method frutas() = frutas
   method sumarFruta() {
     frutas += 1
+  }
+  method reiniciar() {
+  frutas = 0
   }
 }
 

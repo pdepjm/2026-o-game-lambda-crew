@@ -17,24 +17,8 @@ program juego {
 	game.height(15)
 	game.width(15)
 	game.ground("placeholders/suelo.jpg")
-	game.addVisual(helado)
-	game.addVisual(pared)
-	game.addVisual(puntaje)
-	game.addVisual(cantFrut)
-	game.addVisual(acelerador)
-	game.addVisual(relentizador)
 	
-	tick.start()
-
-	keyboard.left().whilePressedDo({helado.moverHacia(izquierda)}, helado.velocidad())
-	keyboard.right().whilePressedDo({helado.moverHacia(derecha)}, helado.velocidad())
-	keyboard.up().whilePressedDo({helado.moverHacia(arriba)}, helado.velocidad())
-	keyboard.down().whilePressedDo({helado.moverHacia(abajo)}, helado.velocidad())
-
-	game.onCollideDo(helado, {elemento => elemento.recibirChoqueDe(helado)})
-
-	creadorDeFrutas.crearFrambuesas()
-	manejadorDeEnemigos.crearEnemigosMovRect()
+	configuracion.iniciar()
 	
 	game.start()
 }

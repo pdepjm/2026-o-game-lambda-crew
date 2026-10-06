@@ -19,7 +19,9 @@ class EnemigoRectangular {
   var sentido = derecha
 
   method recibirChoqueDe(unHelado) {
+    unHelado.morir()
   // pendiente: definir con el grupo qué le pasa al helado
+  //ACTUALIZACION: El helado muere
 }
 
   method movete () {
