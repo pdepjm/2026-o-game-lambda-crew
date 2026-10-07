@@ -93,7 +93,7 @@ object helado {
     method continuarTiraDeHielo() {
         const destino = siguientePosicionHielo
 
-        if (vivo && self.estaDentroDelTablero(destino) && !self.hayHieloEn(destino)) {
+        if (vivo && self.estaDentroDelTablero(destino) && !self.hayHieloEn(destino)&& !manejadorDeEnemigos.hayEnemigoEn(destino)) {
             const hielo = new Hielo(position = destino)
             hielos.add(hielo)
             game.addVisual(hielo)

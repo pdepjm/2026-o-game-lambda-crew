@@ -87,6 +87,10 @@ object manejadorDeEnemigos {
     method moverEnemigos () {
       listaDeEnemigos.forEach{enemigo => enemigo.movete()}
     }
+
+    method hayEnemigoEn(destino) { //para preguntar cuando creamos hielos
+        return listaDeEnemigos.any({ enemigo => enemigo.position() == destino })
+    }
 }
 
 object cartelReintentar {
