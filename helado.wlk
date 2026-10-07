@@ -11,7 +11,7 @@ object helado {
   var puntos = 0
   var velocidad = 150
   var condicionDeVelocidad = 2
-  var imagen = "placeholders/helado.jpeg"
+  var imagen = "placeholders/helado.png"
   var vivo = true
   var direccionActual = derecha
   var siguientePosicionHielo = game.origin()
