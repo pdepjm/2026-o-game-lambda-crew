@@ -54,6 +54,7 @@ object helado {
 
 
     method crearHielo() {
+        
         const destino = self.posicionParaHielo()
         if (vivo && self.estaDentroDelTablero(destino) && !self.hayHieloEn(destino)) {
             const hielo = new Hielo(position = destino)
@@ -80,6 +81,8 @@ object helado {
         vivo = true
         condicionDeVelocidad = 2
         imagen = "placeholders/helado.png"
+        hielos.clear()                
+        direccionActual = derecha 
     }
 
     method posicionParaHielo() {

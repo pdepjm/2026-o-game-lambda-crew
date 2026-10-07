@@ -5,6 +5,7 @@ object derecha {
         method posicionSiguiente(posicion) {
         return posicion.right(1)
     }
+    method opuesta() = izquierda
 }
 
 object izquierda {
@@ -14,6 +15,7 @@ object izquierda {
     method posicionSiguiente(posicion) {      
     return posicion.left(1)
     }
+    method opuesta() = derecha
 }
 
 object arriba {
@@ -23,6 +25,7 @@ object arriba {
     method posicionSiguiente(posicion) {
     return posicion.up(1)
     }
+    method opuesta() = abajo
 }
 
 object abajo {
@@ -32,4 +35,5 @@ object abajo {
     method posicionSiguiente(posicion) {
     return posicion.down(1)
     }
+    method opuesta() = arriba
 }

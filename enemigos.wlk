@@ -17,6 +17,7 @@ class EnemigoRectangular {
   var lix
   var property position = game.at(x,y)
   var sentido = derecha
+  var horario = true
 
   method recibirChoqueDe(unHelado) {
     unHelado.morir()
@@ -29,21 +30,25 @@ class EnemigoRectangular {
     sentido.mover(self)
   }
 
-  method moverA(destino) {                         // si hay hielo no se puede mover 
-    if (!helado.hayHieloEn(destino)) {
-        position = destino
-    }
+  method moverA(destino) {                         
+    if (helado.hayHieloEn(destino)) {   // hay hielo: se da vuelta
+    horario = !horario
+    sentido = sentido.opuesta()
+  } else {
+    position = destino
+  }
   }
 
   method evaluarMovimiento() {
     if (position == game.at(lsx,lsy)) {
-      sentido = abajo
+    sentido = if (horario) abajo else izquierda
   } else if (position == game.at(lsx,liy)) {
-      sentido = izquierda
-  } else if (position == game.at(lix,lsy)) {
-      sentido = derecha
+    sentido = if (horario) izquierda else arriba
   } else if (position == game.at(lix,liy)) {
-      sentido = arriba
+    sentido = if (horario) arriba else derecha
+  } else if (position == game.at(lix,lsy)) {
+    sentido = if (horario) derecha else abajo
   }
+
 }
 }
