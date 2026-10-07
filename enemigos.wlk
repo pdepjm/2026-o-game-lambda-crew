@@ -29,8 +29,10 @@ class EnemigoRectangular {
     sentido.mover(self)
   }
 
-  method moverA (destino) {
-    position = destino
+  method moverA(destino) {                         // si hay hielo no se puede mover 
+    if (!helado.hayHieloEn(destino)) {
+        position = destino
+    }
   }
 
   method evaluarMovimiento() {
