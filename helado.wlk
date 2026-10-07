@@ -69,7 +69,7 @@ object helado {
     method morir() {
      if (vivo) {   
         vivo = false
-        imagen = "placeholders/helado_muerto.jpg"
+        imagen = "placeholders/helado_muerto.jpeg"
         cartelReintentar.mostrar()
     }
     }
@@ -79,6 +79,7 @@ object helado {
         position = game.origin()
         vivo = true
         condicionDeVelocidad = 2
+        imagen = "placeholders/helado.png"
     }
 
     method posicionParaHielo() {
