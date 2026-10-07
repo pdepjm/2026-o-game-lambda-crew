@@ -22,7 +22,7 @@ class Fruta {
 
 
 object acelerador {
-  var imagen = "diesel.jpg"
+  var imagen = "placeholders/diesel.jpg"
   method image () = imagen 
 
   var property position = game.at(13,13)
@@ -37,7 +37,7 @@ object acelerador {
 }
 
 object relentizador {
-  var imagen = "placeholders/copito.jpeg"
+  var imagen = "placeholders/copito.jpg"
   method image () = imagen 
 
   var property position = game.at(6,6)
