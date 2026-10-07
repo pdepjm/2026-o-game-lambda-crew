@@ -8,6 +8,7 @@ object configuracion {
   method iniciar() {
     const tick = game.tick(666, { manejadorDeEnemigos.moverEnemigos() }, false)
 
+
     game.addVisual(helado)
     game.addVisual(pared)
     game.addVisual(puntaje)
@@ -21,6 +22,8 @@ object configuracion {
     keyboard.right().whilePressedDo({helado.moverHacia(derecha)}, helado.velocidad())
     keyboard.up().whilePressedDo({helado.moverHacia(arriba)}, helado.velocidad())
     keyboard.down().whilePressedDo({helado.moverHacia(abajo)}, helado.velocidad())
+    keyboard.space().onPressDo({helado.iniciarTiraDeHielo()  helado.continuarTiraDeHielo()})
+ 
 
     game.onCollideDo(helado, {elemento => elemento.recibirChoqueDe(helado)})
 

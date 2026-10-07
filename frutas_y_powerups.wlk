@@ -37,7 +37,7 @@ object acelerador {
 }
 
 object relentizador {
-  var imagen = "copito.jpg"
+  var imagen = "placeholders/copito.jpeg"
   method image () = imagen 
 
   var property position = game.at(6,6)
