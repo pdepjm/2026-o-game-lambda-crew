@@ -82,7 +82,7 @@ object helado {
     }
 
     method posicionParaHielo() {
-     return direccionActual.posicionSiguiente(position)   // ve cual es la ultima direccion en la que se mov 
+        return direccionActual.posicionSiguiente(position)   // ve cual es la ultima direccion en la que se mov 
     }                                                    // y le suma uno, la funcion esta en direcciones. 
 
     method iniciarTiraDeHielo() {
@@ -103,25 +103,25 @@ object helado {
         }
     }
     method hieloEn(unaPosicion) {  //Esta deberia devolver el objeto del hielo en la pos que le mandamos
-    return hielos.find({ hielo => hielo.position() == unaPosicion })
+        return hielos.find({ hielo => hielo.position() == unaPosicion })
     }
 
     method iniciarRompidaDeHielo() { 
-    direccionDeLaTira = direccionActual
-    siguientePosicionHielo = self.posicionParaHielo()
+        direccionDeLaTira = direccionActual
+        siguientePosicionHielo = self.posicionParaHielo()
     }
 
     method continuarRompidaDeHielo() {
-    const destino = siguientePosicionHielo
+        const destino = siguientePosicionHielo
 
-    if (vivo && self.estaDentroDelTablero(destino) && self.hayHieloEn(destino)) {
-        const hieloARomper = self.hieloEn(destino) // Obtener el objeto hielo en esa posición
-        
-        hielos.remove(hieloARomper)
-        game.removeVisual(hieloARomper)
-        
-        siguientePosicionHielo = direccionDeLaTira.posicionSiguiente(destino)
-        game.schedule(200, { self.continuarRompidaDeHielo() })
-    }
+        if (vivo && self.estaDentroDelTablero(destino) && self.hayHieloEn(destino)) {
+            const hieloARomper = self.hieloEn(destino) // Obtener el objeto hielo en esa posición
+            
+            hielos.remove(hieloARomper)
+            game.removeVisual(hieloARomper)
+            
+            siguientePosicionHielo = direccionDeLaTira.posicionSiguiente(destino)
+            game.schedule(200, { self.continuarRompidaDeHielo() })
+        }
 }
 }

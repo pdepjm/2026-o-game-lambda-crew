@@ -23,10 +23,10 @@ object configuracion {
     keyboard.up().whilePressedDo({helado.moverHacia(arriba)}, helado.velocidad())
     keyboard.down().whilePressedDo({helado.moverHacia(abajo)}, helado.velocidad())
     keyboard.space().onPressDo({
-    if (helado.hayHieloEn(helado.posicionParaHielo())) {
+      if (helado.hayHieloEn(helado.posicionParaHielo())) {
         helado.iniciarRompidaDeHielo()
         helado.continuarRompidaDeHielo()
-    } else {
+      } else {
         helado.iniciarTiraDeHielo()
         helado.continuarTiraDeHielo()
     }
