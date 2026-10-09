@@ -41,9 +41,19 @@ object configuracion {
 object creadorDeFrutas {
 
   var cantidadDeFrutas = 0
+  var frutaActual = 0
+
+  method crearFrutas() {
+    if (frutaActual=="frambuesa") {
+      self.crearUvas()
+    } else {
+      //acá iría la implementación de pasar de nivel o finalizar el juego
+    }
+  }
 
   method crearFrambuesas() {
     cantidadDeFrutas = 0
+    frutaActual = "frambuesa"
     const limiteX = game.width() - 1
     const limiteY = game.height() - 1
 
@@ -52,6 +62,24 @@ object creadorDeFrutas {
         
         if (posicionEnY.odd() && posicionEnX.even()) {
           game.addVisual(new Fruta(x = posicionEnX, y = posicionEnY, imagen = "placeholders/frambuesa.jpg"))
+          cantidadDeFrutas +=1
+        }
+      }
+    }
+  }
+
+  method crearUvas() {
+    cantidadDeFrutas = 0
+    frutaActual = "uva"
+    const limiteX = game.width() - 1
+    const limiteY = game.height() - 1
+    const columnas = [2,6,10,14]
+
+    (0..limiteX).forEach { posicionEnX =>
+      (0..limiteY).forEach { posicionEnY =>
+        
+        if (columnas.contains(posicionEnY) && posicionEnX.odd()) {
+          game.addVisual(new Fruta(x = posicionEnX, y = posicionEnY, imagen = "placeholders/uva.png"))
           cantidadDeFrutas +=1
         }
       }

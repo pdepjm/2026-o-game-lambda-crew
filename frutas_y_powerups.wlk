@@ -13,9 +13,9 @@ class Fruta {
   method puntosOtorgados () = 100
 
   method recibirChoqueDe(unHelado){
-  game.removeVisual(self)
-  puntaje.sumarPuntos(self.puntosOtorgados())
-  cantFrut.sumarFruta()
+    game.removeVisual(self)
+    puntaje.sumarPuntos(self.puntosOtorgados())
+    cantFrut.sumarFruta()
   }
 }
 
