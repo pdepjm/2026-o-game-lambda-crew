@@ -18,10 +18,10 @@ object configuracion {
 
     tick.start()
 
-    keyboard.left().whilePressedDo({helado.moverHacia(izquierda)}, helado.velocidad())
-    keyboard.right().whilePressedDo({helado.moverHacia(derecha)}, helado.velocidad())
-    keyboard.up().whilePressedDo({helado.moverHacia(arriba)}, helado.velocidad())
-    keyboard.down().whilePressedDo({helado.moverHacia(abajo)}, helado.velocidad())
+    keyboard.left().whilePressedDo({helado.moverHacia(izquierda)}, 25)
+    keyboard.right().whilePressedDo({helado.moverHacia(derecha)}, 25)
+    keyboard.up().whilePressedDo({helado.moverHacia(arriba)}, 25)
+    keyboard.down().whilePressedDo({helado.moverHacia(abajo)}, 25)
     keyboard.space().onPressDo({
       if (helado.hayHieloEn(helado.posicionParaHielo())) {
         helado.iniciarRompidaDeHielo()

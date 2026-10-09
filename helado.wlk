@@ -9,8 +9,8 @@ import hielos.*
 object helado {
   var property position = game.origin()
   var puntos = 0
-  var velocidad = 150
-  var condicionDeVelocidad = 2
+  var velocidad = normal
+  var enfriando = false
   var imagen = "placeholders/helado.png"
   var vivo = true
   var direccionActual = derecha
@@ -21,22 +21,30 @@ object helado {
 
   method position () = position
 
-  method velocidad() = velocidad
-
   method image() = imagen
 
-  method cambiarCondicionDeVelocidad(numero) {
-    condicionDeVelocidad = numero
-  }
+  method movimiento() {}
+
+  method cambiarVelocidad(nuevaVelocidad) {
+  velocidad = nuevaVelocidad
+}
+
+method terminarEnfriamiento() {
+  enfriando = false
+}
 
     // Creo que este es el método y la forma en la que diana se refería que teníamos que hacer las cosas.
     // Ahora si, hay un nuevo bug que de vez en cuando el personaje mete turbo sin razón aparente. 
     method moverHacia(direccion) {
-        direccionActual = direccion
+    direccionActual = direccion
+    if (!enfriando) {
         direccion.mover(self)
+        enfriando = true
+        game.schedule(velocidad.intervalo(), { self.terminarEnfriamiento() })
+    }
     }
 
-   method moverA(destino) {
+    method moverA(destino) {
         if (vivo &&
             self.estaDentroDelTablero(destino) &&
             !self.hayHieloEn(destino)
@@ -79,7 +87,8 @@ object helado {
     method reiniciar() {
         position = game.origin()
         vivo = true
-        condicionDeVelocidad = 2
+        velocidad = normal
+        enfriando = false
         imagen = "placeholders/helado.png"
         hielos.clear()                
         direccionActual = derecha 

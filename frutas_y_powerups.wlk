@@ -2,6 +2,7 @@ import enemigos.*
 import manejadores.*
 import helado.*
 import extras.*
+import velocidades.*
 
 class Fruta {
   var imagen
@@ -27,13 +28,13 @@ object acelerador {
 
   var property position = game.at(13,13)
   method aplicarEfecto (unHelado) {
-    unHelado.cambiarCondicionDeVelocidad(3)
-    game.schedule(10000, {unHelado.cambiarCondicionDeVelocidad(2)})
+    unHelado.cambiarVelocidad(veloz)
+    game.schedule(10000, {unHelado.cambiarVelocidad(normal)})
   }
   method recibirChoqueDe(unHelado) {
-  game.removeVisual(self)
-  self.aplicarEfecto(unHelado)
-}
+    game.removeVisual(self)
+    self.aplicarEfecto(unHelado)
+  }
 }
 
 object relentizador {
@@ -42,11 +43,11 @@ object relentizador {
 
   var property position = game.at(6,6)
   method aplicarEfecto (unHelado) {
-    unHelado.cambiarCondicionDeVelocidad(1)
-    game.schedule(10000, {unHelado.cambiarCondicionDeVelocidad(2)})
+    unHelado.cambiarVelocidad(lento)
+    game.schedule(10000, {unHelado.cambiarVelocidad(normal)})
   }
   method recibirChoqueDe(unHelado) {
-  game.removeVisual(self)
-  self.aplicarEfecto(unHelado)
-}
+    game.removeVisual(self)
+    self.aplicarEfecto(unHelado)
+  }
 }
