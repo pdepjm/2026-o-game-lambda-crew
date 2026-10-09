@@ -8,7 +8,6 @@ import hielos.*
 
 object helado {
   var property position = game.origin()
-  var puntos = 0
   var velocidad = normal
   var enfriando = false
   var imagen = "placeholders/helado.png"
@@ -18,8 +17,6 @@ object helado {
   var direccionDeLaTira = derecha
 
   const hielos = []
-
-  method position () = position
 
   method image() = imagen
 
@@ -33,8 +30,6 @@ method terminarEnfriamiento() {
   enfriando = false
 }
 
-    // Creo que este es el método y la forma en la que diana se refería que teníamos que hacer las cosas.
-    // Ahora si, hay un nuevo bug que de vez en cuando el personaje mete turbo sin razón aparente. 
     method moverHacia(direccion) {
     direccionActual = direccion
     if (!enfriando) {
@@ -53,12 +48,12 @@ method terminarEnfriamiento() {
         }
     }
 
-    method estaDentroDelTablero(destino) {  // era mas facil crear un metodo 
-      return destino.x() >= 0 &&
-             destino.x() < 14.5 &&
-             destino.y() >= 0 &&
-             destino.y() < 14.5
-    }
+    method estaDentroDelTablero(destino) {
+        return destino.x() >= 0 &&
+         destino.x() < game.width() &&
+         destino.y() >= 0 &&
+         destino.y() < game.height()
+}
 
 
     method crearHielo() {
