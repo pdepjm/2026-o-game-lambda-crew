@@ -7,3 +7,33 @@ describe "movimiento del helado" {
     assert.equals(game.at(1, 0), helado.position())
   }
 }
+
+describe "hielo"{
+
+  method initialize() {
+    game.clear()
+    game.width(15)     
+    game.height(15)
+    helado.reiniciar()
+  }
+  test "no se pueden crear dos hielos en la misma celda" {
+    helado.crearHielo()
+    helado.crearHielo()
+    assert.equals(1, game.getObjectsIn(game.at(1, 0)).size())
+  }
+
+  test "el hielo se crea en la dirección en la que mira el helado" {
+    helado.position(game.at(5, 5))
+    helado.moverHacia(arriba)               // pasa a (5,6) mirando hacia arriba
+    helado.crearHielo()
+    assert.that(helado.hayHieloEn(game.at(5, 7)))
+  }
+
+  test "romper hielo elimina el hielo de adelante" {
+    helado.crearHielo()
+    helado.iniciarRompidaDeHielo()
+    helado.continuarRompidaDeHielo()
+    assert.notThat(helado.hayHieloEn(game.at(1, 0)))
+    assert.equals(0, game.getObjectsIn(game.at(1, 0)).size())
+  }
+}
