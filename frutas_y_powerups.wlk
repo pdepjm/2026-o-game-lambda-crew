@@ -6,12 +6,13 @@ import velocidades.*
 
 class Fruta {
   var imagen
+  var puntos
   method image() = imagen
 
   var x
   var y
   var property position = game.at(x,y)
-  method puntosOtorgados () = 100
+  method puntosOtorgados () = puntos
 
   method recibirChoqueDe(unHelado){
     game.removeVisual(self)

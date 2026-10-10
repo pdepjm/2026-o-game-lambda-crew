@@ -61,7 +61,7 @@ object creadorDeFrutas {
       (0..limiteY).forEach { posicionEnY =>
         
         if (posicionEnY.odd() && posicionEnX.even()) {
-          game.addVisual(new Fruta(x = posicionEnX, y = posicionEnY, imagen = "placeholders/frambuesa.jpg"))
+          game.addVisual(new Fruta(x = posicionEnX, y = posicionEnY, imagen = "placeholders/frambuesa.jpg", puntos = 100))
           cantidadDeFrutas +=1
         }
       }
@@ -79,7 +79,7 @@ object creadorDeFrutas {
       (0..limiteY).forEach { posicionEnY =>
         
         if (columnas.contains(posicionEnY) && posicionEnX.odd()) {
-          game.addVisual(new Fruta(x = posicionEnX, y = posicionEnY, imagen = "placeholders/uva.png"))
+          game.addVisual(new Fruta(x = posicionEnX, y = posicionEnY, imagen = "placeholders/uva.png", puntos = 200))
           cantidadDeFrutas +=1
         }
       }

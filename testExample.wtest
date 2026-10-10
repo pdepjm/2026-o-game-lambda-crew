@@ -5,12 +5,21 @@ import direcciones.*
 import frutas_y_powerups.*
 import wollok.game.*
 
-describe "contador de frutas comidas" {
-  
-  const frut = new Fruta(x = 3, y = 3, imagen = "placeholders/frambuesa.jpg")
-  test "cuando la fruta recibe un choque del helado, aumenta en 1 el contador de frutas comidas" {
+describe "consumisición de frutas" {
+
+  const frut = new Fruta(x = 3, y = 3, imagen = "placeholders/frambuesa.jpg", puntos = 100)
+  test "cuando la fruta recibe un choque del helado aumenta en 1 el contador de frutas comidas" {
     frut.recibirChoqueDe(helado)
-    assert.equals(puntaje.puntos(),1)
+    assert.equals(1,puntaje.puntos())
+  }
+  test "cuando la fruta recibe un choque del helado desaparece" {
+    frut.recibirChoqueDe(helado)
+    assert.equals("",frut.image()) // creo que no está bien pero no me anda el correr los tests así que no puedo testear los tests
+  }
+
+  test "cuando la fruta recibe un choque del helado suma la cantidad de puntos correspondiente a la fruta" {
+    frut.recibirChoqueDe(helado)
+    assert.equals(frut.puntosOtorgados(), puntaje.puntos())
   }
 
 }
