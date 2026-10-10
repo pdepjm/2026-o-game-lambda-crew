@@ -1,6 +1,19 @@
+import manejadores.*
+import objetos.*
 import helado.*
 import direcciones.*
+import frutas_y_powerups.*
+import wollok.game.*
 
+describe "contador de frutas comidas" {
+  
+  const frut = new Fruta(x = 3, y = 3, imagen = "placeholders/frambuesa.jpg")
+  test "cuando la fruta recibe un choque del helado, aumenta en 1 el contador de frutas comidas" {
+    frut.recibirChoqueDe(helado)
+    assert.equals(puntaje.puntos(),1)
+  }
+
+}
 describe "movimiento del helado" {
   test "al ir a la derecha avanza una casilla" {
     helado.moverHacia(derecha)

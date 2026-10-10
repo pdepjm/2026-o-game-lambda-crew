@@ -29,6 +29,7 @@ object cantFrut inherits Ornamental{
     frutas += 1
     if (frutas==creadorDeFrutas.cantidadDeFrutas()) {
       creadorDeFrutas.crearFrutas()
+      self.reiniciar()
     }
   }
   method reiniciar() {
