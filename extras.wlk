@@ -24,7 +24,6 @@ object cantFrut inherits Ornamental{
   var property frutas = 0
   method position() = game.at(0,14)
   method text() = ("Frutas Comidas: "+ self.frutas() + "/" + creadorDeFrutas.cantidadDeFrutas())
-  method frutas() = frutas
   method sumarFruta() {
     frutas += 1
     if (frutas==creadorDeFrutas.cantidadDeFrutas()) {
