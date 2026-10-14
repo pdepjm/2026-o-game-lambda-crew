@@ -65,10 +65,10 @@ object creadorDeFrutas {
           const nuevaFrambuesa = new Fruta(x = posicionEnX, y = posicionEnY, imagen = "placeholders/frambuesa.jpg", puntos = 100)
           game.addVisual(nuevaFrambuesa)
           frambuesasCreadas.add(nuevaFrambuesa)
+          cantidadDeFrutas+=1
         }
       }
     }
-    cantidadDeFrutas = frambuesasCreadas.size()
   }
 
   method crearUvas() {
@@ -84,10 +84,10 @@ object creadorDeFrutas {
           const nuevaUva = new Fruta(x = posicionEnX, y = posicionEnY, imagen = "placeholders/uva.png", puntos = 200)
           game.addVisual(nuevaUva)
           uvasCreadas.add(nuevaUva)
+          cantidadDeFrutas+=1
         }
       }
     }
-    cantidadDeFrutas = uvasCreadas.size()
   }
 
 }
