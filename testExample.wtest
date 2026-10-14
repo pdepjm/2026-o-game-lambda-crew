@@ -13,14 +13,19 @@ describe "consumisición de frutas" {
     assert.equals(1,cantFrut.frutas())
   }
   test "cuando la fruta recibe un choque del helado desaparece" {
-    game.addVisual(frut)
     frut.recibirChoqueDe(helado)
-    assert.equals(0, game.getObjectsIn(frut.position()).size()) // creo que no está bien pero no me anda el correr los tests así que no puedo testear los tests
+    assert.equals(0, game.getObjectsIn(frut.position()).size())
   }
 
   test "cuando la fruta recibe un choque del helado suma la cantidad de puntos correspondiente a la fruta" {
     frut.recibirChoqueDe(helado)
     assert.equals(frut.puntosOtorgados(), puntaje.puntos())
+  }
+
+  test "cuando se agarran todas las frambuesas aparecen uvas" {
+    creadorDeFrutas.crearFrambuesas()
+    creadorDeFrutas.frambuesasCreadas().forEach{frambuesa => frambuesa.recibirChoqueDe(helado)}
+    assert.equals("uva",creadorDeFrutas.frutaActual())
   }
 
 }
@@ -31,6 +36,28 @@ describe "movimiento del helado" {
   }
 }
 
+describe "funcionamiento de los PowerUps" {
+  test "cuando un powerUp recibe un choque del helado desaparece" {
+    acelerador.recibirChoqueDe(helado)
+    assert.equals(0, game.getObjectsIn(acelerador.position()).size())
+  }
+  test "cuando un helado agarra un acelerador se mueve más rápido que antes de agarrarlo" {
+    const velInicial = helado.velocidad()
+    const intInicial = velInicial.intervalo()
+    acelerador.recibirChoqueDe(helado)
+    const velFinal = helado.velocidad()
+    const intFinal = velFinal.intervalo()
+    assert.that(intFinal<intInicial)
+  }
+  test "cuando un helado agarra un relentizador se mueve más lento que antes de agarrarlo" {
+    const velInicial = helado.velocidad()
+    const intInicial = velInicial.intervalo()
+    relentizador.recibirChoqueDe(helado)
+    const velFinal = helado.velocidad()
+    const intFinal = velFinal.intervalo()
+    assert.that(intFinal>intInicial)
+  }
+}
 describe "hielo"{
 
   method initialize() {

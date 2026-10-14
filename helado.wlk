@@ -8,7 +8,7 @@ import hielos.*
 
 object helado {
   var property position = game.origin()
-  var velocidad = normal
+  var property velocidad = normal
   var enfriando = false
   var imagen = "placeholders/helado.png"
   var vivo = true

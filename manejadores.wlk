@@ -40,8 +40,10 @@ object configuracion {
 }
 object creadorDeFrutas {
 
-  var cantidadDeFrutas = 0
-  var frutaActual = 0
+  var property cantidadDeFrutas = 0
+  var property frutaActual = 0
+  const property frambuesasCreadas = []
+  const property uvasCreadas = []
 
   method crearFrutas() {
     if (frutaActual=="frambuesa") {
@@ -52,7 +54,6 @@ object creadorDeFrutas {
   }
 
   method crearFrambuesas() {
-    cantidadDeFrutas = 0
     frutaActual = "frambuesa"
     const limiteX = game.width() - 1
     const limiteY = game.height() - 1
@@ -61,15 +62,16 @@ object creadorDeFrutas {
       (0..limiteY).forEach { posicionEnY =>
         
         if (posicionEnY.odd() && posicionEnX.even()) {
-          game.addVisual(new Fruta(x = posicionEnX, y = posicionEnY, imagen = "placeholders/frambuesa.jpg", puntos = 100))
-          cantidadDeFrutas +=1
+          const nuevaFrambuesa = new Fruta(x = posicionEnX, y = posicionEnY, imagen = "placeholders/frambuesa.jpg", puntos = 100)
+          game.addVisual(nuevaFrambuesa)
+          frambuesasCreadas.add(nuevaFrambuesa)
         }
       }
     }
+    cantidadDeFrutas = frambuesasCreadas.size()
   }
 
   method crearUvas() {
-    cantidadDeFrutas = 0
     frutaActual = "uva"
     const limiteX = game.width() - 1
     const limiteY = game.height() - 1
@@ -79,14 +81,15 @@ object creadorDeFrutas {
       (0..limiteY).forEach { posicionEnY =>
         
         if (columnas.contains(posicionEnY) && posicionEnX.odd()) {
-          game.addVisual(new Fruta(x = posicionEnX, y = posicionEnY, imagen = "placeholders/uva.png", puntos = 200))
-          cantidadDeFrutas +=1
+          const nuevaUva = new Fruta(x = posicionEnX, y = posicionEnY, imagen = "placeholders/uva.png", puntos = 200)
+          game.addVisual(nuevaUva)
+          uvasCreadas.add(nuevaUva)
         }
       }
     }
+    cantidadDeFrutas = uvasCreadas.size()
   }
 
-  method cantidadDeFrutas () = cantidadDeFrutas
 }
 
 object manejadorDeEnemigos {
