@@ -42,7 +42,8 @@ method terminarEnfriamiento() {
     method moverA(destino) {
         if (vivo &&
             self.estaDentroDelTablero(destino) &&
-            !self.hayHieloEn(destino)
+            !self.hayHieloEn(destino) &&
+            !self.hayParedEn(destino)
             ) {
             position = destino
         }
@@ -68,6 +69,10 @@ method terminarEnfriamiento() {
 
     method hayHieloEn(destino) {          // consulta si hay hielos en el lugar 
         return hielos.any({ hielo => hielo.position() == destino }) 
+    }
+
+    method hayParedEn(destino) {
+      return destino == pared.position()
     }
 
     method morir() {
@@ -101,7 +106,7 @@ method terminarEnfriamiento() {
     method continuarTiraDeHielo() {
         const destino = siguientePosicionHielo
 
-        if (vivo && self.estaDentroDelTablero(destino) && !self.hayHieloEn(destino)&& !manejadorDeEnemigos.hayEnemigoEn(destino)) {
+        if (vivo && self.estaDentroDelTablero(destino) && !self.hayHieloEn(destino)&& !manejadorDeEnemigos.hayEnemigoEn(destino) && !self.hayParedEn(destino)) {
             const hielo = new Hielo(position = destino)
             hielos.add(hielo)
             game.addVisual(hielo)
