@@ -36,8 +36,9 @@ object cantFrut inherits Ornamental{
   }
 }
 
-object pared inherits Ornamental {
+// las paredes las pasamos a clases asi creamos muchas asl crear niveles (queda ifual solo ponemos class)
+class Pared inherits Ornamental {
+  const property position
   method image() = "placeholders/pared.jpg"
   
-  var property position = game.center()
 }

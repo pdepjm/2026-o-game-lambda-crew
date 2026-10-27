@@ -3,14 +3,19 @@ import frutas_y_powerups.*
 import helado.*
 import extras.*
 import direcciones.*
+import niveles.*
 
 object configuracion {
+  var nivelActual = nivel1
+  method nivelActual() = nivelActual
+
   method iniciar() {
+    nivelActual.iniciar()       // dibuja el mapa y posiciona al helado
     const tick = game.tick(666, { manejadorDeEnemigos.moverEnemigos() }, false)
 
 
     game.addVisual(helado)
-    game.addVisual(pared)
+    //game.addVisual(p) --> Lo sacamos pq ahora lo hace nivel 
     game.addVisual(puntaje)
     game.addVisual(cantFrut)
     game.addVisual(acelerador)
@@ -36,6 +41,18 @@ object configuracion {
 
     creadorDeFrutas.crearFrambuesas()
     manejadorDeEnemigos.crearEnemigosMovRect()
+    
+    // TEMPORAL, solo para probar q el nivel 2 se gebere bueb 
+    //dsp vemos como hacer para que se genere al comer todas las frutas
+      // creo que con meter pasar de nivel al creador de las frutas funca 
+    keyboard.n().onPressDo({ self.pasarDeNivel() })
+  }
+
+  method pasarDeNivel() {
+    nivelActual = nivelActual.siguienteNivel()
+    game.clear()
+    helado.reiniciar()
+    self.iniciar()
   }
 }
 object creadorDeFrutas {

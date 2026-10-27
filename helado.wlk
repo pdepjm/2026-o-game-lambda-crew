@@ -71,9 +71,8 @@ method terminarEnfriamiento() {
         return hielos.any({ hielo => hielo.position() == destino }) 
     }
 
-    method hayParedEn(destino) {
-      return destino == pared.position()
-    }
+    //cambiamos el hay pared por el de la cosa de los niveles 
+    method hayParedEn(destino) = configuracion.nivelActual().hayParedEn(destino)
 
     method morir() {
      if (vivo) {   
