@@ -2,7 +2,8 @@ import wollok.game.*
 
 import enemigos.*
 import manejadores.*
-import frutas_y_powerups.*
+import frutas.*
+import powerUps.*
 import extras.*
 import helado.*
 import direcciones.*

@@ -1,9 +1,10 @@
 import enemigos.*
-import frutas_y_powerups.*
+import frutas.*
 import helado.*
 import extras.*
 import direcciones.*
 import niveles.*
+import powerUps.*
 
 object configuracion {
   var nivelActual = nivel1
@@ -12,6 +13,7 @@ object configuracion {
   method iniciar() {
     nivelActual.iniciar()       // dibuja el mapa y posiciona al helado
     const tick = game.tick(666, { manejadorDeEnemigos.moverEnemigos() }, false)
+    const tick2 = game.tick(500,{ manejadorDeFrutas.moverUvas() }, false)
 
 
     game.addVisual(helado)
@@ -22,6 +24,7 @@ object configuracion {
     game.addVisual(relentizador)
 
     tick.start()
+    tick2.start()
 
     keyboard.left().whilePressedDo({helado.moverHacia(izquierda)}, 25)
     keyboard.right().whilePressedDo({helado.moverHacia(derecha)}, 25)
@@ -39,7 +42,7 @@ object configuracion {
 
     game.onCollideDo(helado, {elemento => elemento.recibirChoqueDe(helado)})
 
-    creadorDeFrutas.crearFrambuesas()
+    manejadorDeFrutas.crearFrambuesas()
     manejadorDeEnemigos.crearEnemigosMovRect()
     
     // TEMPORAL, solo para probar q el nivel 2 se gebere bueb 
@@ -55,7 +58,7 @@ object configuracion {
     self.iniciar()
   }
 }
-object creadorDeFrutas {
+object manejadorDeFrutas {
 
   var property cantidadDeFrutas = 0
   var property frutaActual = 0
@@ -92,19 +95,24 @@ object creadorDeFrutas {
     frutaActual = "uva"
     const limiteX = game.width() - 1
     const limiteY = game.height() - 1
-    const columnas = [2,6,10,14]
+    const columnas = [2,8,14]
 
     (0..limiteX).forEach { posicionEnX =>
       (0..limiteY).forEach { posicionEnY =>
         
         if (columnas.contains(posicionEnY) && posicionEnX.odd()) {
-          const nuevaUva = new Fruta(x = posicionEnX, y = posicionEnY, imagen = "placeholders/uva.png", puntos = 200)
+          const nuevaUva = new FrutaRectangular(x = posicionEnX, y = posicionEnY, imagen = "placeholders/uva.png", puntos = 200, lsx=posicionEnX+1,
+          lix=posicionEnX,lsy=posicionEnY,liy=posicionEnY-1)
           game.addVisual(nuevaUva)
           uvasCreadas.add(nuevaUva)
           cantidadDeFrutas+=1
         }
       }
     }
+  }
+
+  method moverUvas () {
+      uvasCreadas.forEach{uva => uva.movete()}
   }
 
 }
@@ -137,7 +145,7 @@ object manejadorDeEnemigos {
     }
 
     method hayEnemigoEn(destino) { //para preguntar cuando creamos hielos
-        return listaDeEnemigos.any({ enemigo => enemigo.position() == destino })
+      return listaDeEnemigos.any({ enemigo => enemigo.position() == destino })
     }
 }
 

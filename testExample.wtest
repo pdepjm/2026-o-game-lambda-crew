@@ -1,7 +1,8 @@
 import manejadores.*
 import helado.*
 import direcciones.*
-import frutas_y_powerups.*
+import frutas.*
+import powerUps.*
 import wollok.game.*
 import extras.*
 
@@ -23,9 +24,9 @@ describe "consumisición de frutas" {
   }
 
   test "cuando se agarran todas las frambuesas aparecen uvas" {
-    creadorDeFrutas.crearFrambuesas()
-    creadorDeFrutas.frambuesasCreadas().forEach{frambuesa => frambuesa.recibirChoqueDe(helado)}
-    assert.equals("uva",creadorDeFrutas.frutaActual())
+    manejadorDeFrutas.crearFrambuesas()
+    manejadorDeFrutas.frambuesasCreadas().forEach{frambuesa => frambuesa.recibirChoqueDe(helado)}
+    assert.equals("uva",manejadorDeFrutas.frutaActual())
   }
 
 }

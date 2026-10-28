@@ -1,6 +1,7 @@
 import enemigos.*
 import manejadores.*
-import frutas_y_powerups.*
+import frutas.*
+import powerUps.*
 import extras.*
 import velocidades.*
 import direcciones.*

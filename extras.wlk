@@ -1,6 +1,6 @@
 import enemigos.*
 import manejadores.*
-import frutas_y_powerups.*
+import frutas.*
 import helado.*
 
 class Ornamental {
@@ -23,11 +23,11 @@ object puntaje inherits Ornamental{
 object cantFrut inherits Ornamental{
   var property frutas = 0
   method position() = game.at(0,14)
-  method text() = ("Frutas Comidas: "+ self.frutas() + "/" + creadorDeFrutas.cantidadDeFrutas())
+  method text() = ("Frutas Comidas: "+ self.frutas() + "/" + manejadorDeFrutas.cantidadDeFrutas())
   method sumarFruta() {
     frutas += 1
-    if (frutas==creadorDeFrutas.cantidadDeFrutas()) {
-      creadorDeFrutas.crearFrutas()
+    if (frutas==manejadorDeFrutas.cantidadDeFrutas()) {
+      manejadorDeFrutas.crearFrutas()
       self.reiniciar()
     }
   }
