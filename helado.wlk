@@ -17,7 +17,6 @@ object helado {
   var siguientePosicionHielo = game.origin()
   var direccionDeLaTira = derecha
 
-  const hielos = []
 
   method image() = imagen
 
@@ -58,22 +57,20 @@ method terminarEnfriamiento() {
 }
 
     method crearHieloEn(destino) {
-        const hielo = new Hielo(position = destino)
-        hielos.add(hielo)
-        game.addVisual(hielo)
+        manejadorDeHielo.crearHieloEn(destino)
     }
 
     method crearHielo() {
-        
         const destino = self.posicionParaHielo()
         if (vivo && self.estaDentroDelTablero(destino) && !self.hayHieloEn(destino)) {
             self.crearHieloEn(destino)
         }
     }
 
-    method hayHieloEn(destino) {          // consulta si hay hielos en el lugar 
-        return hielos.any({ hielo => hielo.position() == destino }) 
-    }
+    method hayHieloEn(destino) {
+        return manejadorDeHielo.hayHieloEn(destino)
+    }   
+    
 
     //cambiamos el hay pared por el de la cosa de los niveles 
     method hayParedEn(destino) = configuracion.nivelActual().hayParedEn(destino)
@@ -116,8 +113,13 @@ method terminarEnfriamiento() {
             game.schedule(200, { self.continuarTiraDeHielo() })
         }
     }
-    method hieloEn(unaPosicion) {  //Esta deberia devolver el objeto del hielo en la pos que le mandamos
-        return hielos.find({ hielo => hielo.position() == unaPosicion })
+
+    method hieloEn(unaPosicion) {
+        return manejadorDeHielo.hieloEn(unaPosicion)
+    }
+
+    method romperHieloEn(destino) {
+        manejadorDeHielo.romperHieloEn(destino)
     }
 
     method iniciarRompidaDeHielo() { 
@@ -129,13 +131,9 @@ method terminarEnfriamiento() {
         const destino = siguientePosicionHielo
 
         if (vivo && self.estaDentroDelTablero(destino) && self.hayHieloEn(destino)) {
-            const hieloARomper = self.hieloEn(destino) // Obtener el objeto hielo en esa posición
-            
-            hielos.remove(hieloARomper)
-            game.removeVisual(hieloARomper)
-            
+            self.romperHieloEn(destino)
             siguientePosicionHielo = direccionDeLaTira.posicionSiguiente(destino)
             game.schedule(200, { self.continuarRompidaDeHielo() })
         }
-}
+    }
 }

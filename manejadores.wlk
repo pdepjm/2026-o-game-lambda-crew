@@ -5,6 +5,7 @@ import extras.*
 import direcciones.*
 import niveles.*
 import powerUps.*
+import hielos.*
 
 object configuracion {
   var nivelActual = nivel1
@@ -128,14 +129,39 @@ object cartelReintentar {
 }
 
 object manejadorDeHielo {
+  const hielos = []
 
   method accionar() {
-    if (helado.hayHieloEn(helado.posicionParaHielo())) {
+    if (self.hayHieloEn(helado.posicionParaHielo())) {
       helado.iniciarRompidaDeHielo()
       helado.continuarRompidaDeHielo()
     } else {
       helado.iniciarTiraDeHielo()
       helado.continuarTiraDeHielo()
     }
+  }
+
+  method crearHieloEn(destino) {
+    const hielo = new Hielo(position = destino)
+    hielos.add(hielo)
+    game.addVisual(hielo)
+  }
+
+  method hayHieloEn(destino) {
+    return hielos.any({ hielo => hielo.position() == destino })
+  }
+
+  method hieloEn(destino) {
+    return hielos.find({ hielo => hielo.position() == destino })
+  }
+
+  method romperHieloEn(destino) {
+    const hielo = self.hieloEn(destino)
+    hielos.remove(hielo)
+    game.removeVisual(hielo)
+  }
+
+  method reiniciar() {
+    hielos.clear()
   }
 }
