@@ -57,14 +57,17 @@ method terminarEnfriamiento() {
          destino.y() < game.height()
 }
 
+    method crearHieloEn(destino) {
+        const hielo = new Hielo(position = destino)
+        hielos.add(hielo)
+        game.addVisual(hielo)
+    }
 
     method crearHielo() {
         
         const destino = self.posicionParaHielo()
         if (vivo && self.estaDentroDelTablero(destino) && !self.hayHieloEn(destino)) {
-            const hielo = new Hielo(position = destino)
-            hielos.add(hielo)
-            game.addVisual(hielo)
+            self.crearHieloEn(destino)
         }
     }
 
@@ -107,9 +110,7 @@ method terminarEnfriamiento() {
         const destino = siguientePosicionHielo
 
         if (vivo && self.estaDentroDelTablero(destino) && !self.hayHieloEn(destino)&& !manejadorDeEnemigos.hayEnemigoEn(destino) && !self.hayParedEn(destino)) {
-            const hielo = new Hielo(position = destino)
-            hielos.add(hielo)
-            game.addVisual(hielo)
+            self.crearHieloEn(destino)
             siguientePosicionHielo =
             direccionDeLaTira.posicionSiguiente(destino)
             game.schedule(200, { self.continuarTiraDeHielo() })
