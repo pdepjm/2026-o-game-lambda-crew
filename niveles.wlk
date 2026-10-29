@@ -4,7 +4,7 @@ import extras.*
 import frutas.*
 import manejadores.*
 import movimientoRectangular.*
-
+import enemigos.*
 
 class Nivel {
     const initialGridMap
@@ -12,7 +12,6 @@ class Nivel {
     const property siguienteNivel
 
     const paredes = []
-    const frutas = []
     const enemigos = []
     var posicionInicialHelado = game.origin()
 
@@ -108,13 +107,27 @@ class Nivel {
     }
 
     //================ FIN FRUTAS ===================
-    /*  
-    method agregarEnemigo(x, y){
-        const enemigo = new EnemigoRectangular(position = game.at(x, y))
+
+    // Igual que el Kiwi: la celda es la esquina superior izquierda del recorrido
+    method agregarEnemigo(x, y, lado) {
+        const recorrido = new MovimientoRectangular(
+            x = x, y = y,
+            lix = x, lsx = x + lado,
+            lsy = y, liy = y - lado
+        )
+        const enemigo = new Enemigo(position = game.at(x, y), movimiento = recorrido)
         game.addVisual(enemigo)
         enemigos.add(enemigo)
     }
-    */
+
+    // misma logica que el kiwi, el nivel los mueve
+    method moverEnemigos() {
+        enemigos.forEach({ enemigo => enemigo.movete() })
+    }
+
+    // reemplaza al hayEnemigoEn del manejadorDeEnemigos
+    method hayEnemigoEn(destino) = enemigos.any({ enemigo => enemigo.position() == destino })
+
     // misma lógica que hayHieloEn --> Lo sacamos de helado y lo ponemos aca 
     method hayParedEn(destino) = paredes.any({ pared => pared.position() == destino })
     
@@ -146,9 +159,9 @@ object h { //helado
     }
 }
 
-object e { //enemigo (no lo usamos todavia)
+object e { //enemigo 
     method decode(x, y, nivel) {
-        nivel.agregarEnemigo(x, y)
+        nivel.agregarEnemigo(x, y, 10)
     }
 }
 
@@ -180,9 +193,9 @@ object i { //hielo
 const nivel1 = new Nivel(
     initialGridMap = [
         [_,u,u,u,_,_,_,_,_,_,_,u,u,u,_], //1 
-        [_,f,f,f,_,_,_,_,_,_,_,f,f,f,_], //2
-        [_,f,_,_,_,_,_,_,_,_,_,_,_,f,_], //3
-        [_,f,_,_,_,_,_,_,_,_,_,_,_,f,_], //4
+        [e,f,f,f,e,_,_,_,_,_,_,f,f,f,_], //2
+        [_,f,e,_,_,_,_,_,_,_,_,_,_,f,_], //3
+        [_,f,e,_,_,_,_,_,_,_,_,_,_,f,_], //4
         [_,_,_,_,_,_,_,_,_,f,f,_,_,_,_],
         [u,_,_,_,_,p,p,i,p,p,f,_,_,_,u],
         [u,_,_,_,_,p,u,_,u,p,_,_,_,_,u], // 7
@@ -247,4 +260,6 @@ object finDelJuego {
   method totalFrutas() = 0
   method frutasComidas() = 0
   method moverFrutas() {}
+  method moverEnemigos() {}
+  method hayEnemigoEn(posicion) = false
 }

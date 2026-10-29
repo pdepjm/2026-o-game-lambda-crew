@@ -4,14 +4,14 @@ import helado.*
 class MovimientoRectangular {
 
     method image() = "placeholders/enemigo.jpg" 
-    var x
-    var y
+    const x
+    const y
     // ls = limite superior
-    var lsy
-    var lsx
+    const lsy
+    const lsx
     // li = limite inferior
-    var liy
-    var lix
+    const liy
+    const lix
     var property position = game.at(x,y)
     var sentido = derecha
     var horario = true

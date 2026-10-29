@@ -21,8 +21,7 @@ class Fruta {
 }
 
 class FrutaRectangular inherits MovimientoRectangular {
- 
-  method image() 
+  
   method puntosOtorgados () 
 
   method recibirChoqueDe(unHelado){

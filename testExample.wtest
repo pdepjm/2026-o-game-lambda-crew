@@ -8,10 +8,9 @@ import extras.*
 import niveles.*
 import movimientoRectangular.*
 
-describe "consumisición de frutas" {
 
-  
   /* 
+  describe "consumisición de frutas" 
   const frut = new Fruta(x = 3, y = 3, imagen = "placeholders/frambuesa.jpg", puntos = 100)
     test "cuando la fruta recibe un choque del helado aumenta en 1 el contador de frutas comidas" {
     frut.recibirChoqueDe(helado)
@@ -34,7 +33,7 @@ describe "consumisición de frutas" {
     assert.equals("uva",manejadorDeFrutas.frutaActual())
   }
   */
-}
+
 describe "movimiento del helado" {
   test "al ir a la derecha avanza una casilla" {
     helado.moverHacia(derecha)

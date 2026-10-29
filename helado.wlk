@@ -106,7 +106,7 @@ method terminarEnfriamiento() {
     method continuarTiraDeHielo() {
         const destino = siguientePosicionHielo
 
-        if (vivo && self.estaDentroDelTablero(destino) && !self.hayHieloEn(destino)&& !manejadorDeEnemigos.hayEnemigoEn(destino) && !self.hayParedEn(destino)) {
+        if (vivo && self.estaDentroDelTablero(destino) && !self.hayHieloEn(destino)&& !configuracion.nivelActual().hayEnemigoEn(destino) && !self.hayParedEn(destino)) {
             self.crearHieloEn(destino)
             siguientePosicionHielo =
             direccionDeLaTira.posicionSiguiente(destino)
