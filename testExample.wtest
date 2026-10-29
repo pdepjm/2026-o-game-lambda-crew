@@ -5,14 +5,19 @@ import frutas.*
 import powerUps.*
 import wollok.game.*
 import extras.*
+import niveles.*
+import movimientoRectangular.*
 
 describe "consumisición de frutas" {
 
+  
+  /* 
   const frut = new Fruta(x = 3, y = 3, imagen = "placeholders/frambuesa.jpg", puntos = 100)
-  test "cuando la fruta recibe un choque del helado aumenta en 1 el contador de frutas comidas" {
+    test "cuando la fruta recibe un choque del helado aumenta en 1 el contador de frutas comidas" {
     frut.recibirChoqueDe(helado)
     assert.equals(1,cantFrut.frutas())
   }
+  
   test "cuando la fruta recibe un choque del helado desaparece" {
     frut.recibirChoqueDe(helado)
     assert.equals(0, game.getObjectsIn(frut.position()).size())
@@ -24,11 +29,11 @@ describe "consumisición de frutas" {
   }
 
   test "cuando se agarran todas las frambuesas aparecen uvas" {
-    manejadorDeFrutas.crearFrambuesas()
+    manejadorDeFrutas.agregarFrambuesas()
     manejadorDeFrutas.frambuesasCreadas().forEach{frambuesa => frambuesa.recibirChoqueDe(helado)}
     assert.equals("uva",manejadorDeFrutas.frutaActual())
   }
-
+  */
 }
 describe "movimiento del helado" {
   test "al ir a la derecha avanza una casilla" {

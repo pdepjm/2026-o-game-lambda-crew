@@ -42,7 +42,6 @@ object configuracion {
 
     game.onCollideDo(helado, {elemento => elemento.recibirChoqueDe(helado)})
 
-    manejadorDeFrutas.crearFrambuesas()
     manejadorDeEnemigos.crearEnemigosMovRect()
     
     // TEMPORAL, solo para probar q el nivel 2 se gebere bueb 
@@ -65,6 +64,7 @@ object manejadorDeFrutas {
   const property frambuesasCreadas = []
   const property uvasCreadas = []
 
+  /*
   method crearFrutas() {
     if (frutaActual=="frambuesa") {
       self.crearUvas()
@@ -72,44 +72,11 @@ object manejadorDeFrutas {
       //acá iría la implementación de pasar de nivel o finalizar el juego
     }
   }
-
-  method crearFrambuesas() {
-    frutaActual = "frambuesa"
-    const limiteX = game.width() - 1
-    const limiteY = game.height() - 1
-
-    (0..limiteX).forEach { posicionEnX =>
-      (0..limiteY).forEach { posicionEnY =>
-        
-        if (posicionEnY.odd() && posicionEnX.even()) {
-          const nuevaFrambuesa = new Fruta(x = posicionEnX, y = posicionEnY, imagen = "placeholders/frambuesa.jpg", puntos = 100)
-          game.addVisual(nuevaFrambuesa)
-          frambuesasCreadas.add(nuevaFrambuesa)
-          cantidadDeFrutas+=1
-        }
-      }
-    }
-  }
-
-  method crearUvas() {
-    frutaActual = "uva"
-    const limiteX = game.width() - 1
-    const limiteY = game.height() - 1
-    const columnas = [2,8,14]
-
-    (0..limiteX).forEach { posicionEnX =>
-      (0..limiteY).forEach { posicionEnY =>
-        
-        if (columnas.contains(posicionEnY) && posicionEnX.odd()) {
-          const nuevaUva = new FrutaRectangular(x = posicionEnX, y = posicionEnY, imagen = "placeholders/uva.png", puntos = 200, lsx=posicionEnX+1,
-          lix=posicionEnX,lsy=posicionEnY,liy=posicionEnY-1)
-          game.addVisual(nuevaUva)
-          uvasCreadas.add(nuevaUva)
-          cantidadDeFrutas+=1
-        }
-      }
-    }
-  }
+  */
+  
+  
+  
+  
 
   method moverUvas () {
       uvasCreadas.forEach{uva => uva.movete()}
