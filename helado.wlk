@@ -90,7 +90,7 @@ method terminarEnfriamiento() {
         velocidad = normal
         enfriando = false
         imagen = "placeholders/helado.png"
-        hielos.clear()                
+        manejadorDeHielo.reiniciar()                
         direccionActual = derecha 
     }
 
