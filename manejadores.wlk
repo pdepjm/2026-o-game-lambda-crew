@@ -30,15 +30,7 @@ object configuracion {
     keyboard.right().whilePressedDo({helado.moverHacia(derecha)}, 25)
     keyboard.up().whilePressedDo({helado.moverHacia(arriba)}, 25)
     keyboard.down().whilePressedDo({helado.moverHacia(abajo)}, 25)
-    keyboard.space().onPressDo({
-      if (helado.hayHieloEn(helado.posicionParaHielo())) {
-        helado.iniciarRompidaDeHielo()
-        helado.continuarRompidaDeHielo()
-      } else {
-        helado.iniciarTiraDeHielo()
-        helado.continuarTiraDeHielo()
-    }
-})
+    keyboard.space().onPressDo({ manejadorDeHielo.accionar() })
 
     game.onCollideDo(helado, {elemento => elemento.recibirChoqueDe(helado)})
 
@@ -105,5 +97,18 @@ object cartelReintentar {
     helado.reiniciar()
     puntaje.reiniciar()
     configuracion.iniciar()
+  }
+}
+
+object manejadorDeHielo {
+
+  method accionar() {
+    if (helado.hayHieloEn(helado.posicionParaHielo())) {
+      helado.iniciarRompidaDeHielo()
+      helado.continuarRompidaDeHielo()
+    } else {
+      helado.iniciarTiraDeHielo()
+      helado.continuarTiraDeHielo()
+    }
   }
 }
