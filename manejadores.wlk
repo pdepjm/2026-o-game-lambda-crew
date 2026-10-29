@@ -14,7 +14,7 @@ object configuracion {
   method iniciar() {
     nivelActual.iniciar()       // dibuja el mapa y posiciona al helado
     const tick = game.tick(666, { manejadorDeEnemigos.moverEnemigos() }, false)
-    const tick2 = game.tick(500,{ manejadorDeFrutas.moverUvas() }, false)
+    const tick2 = game.tick(500, { self.nivelActual().moverFrutas() }, false)
 
 
     game.addVisual(helado)
@@ -26,7 +26,7 @@ object configuracion {
 
     tick.start()
     tick2.start()
-
+    
     keyboard.left().whilePressedDo({helado.moverHacia(izquierda)}, 25)
     keyboard.right().whilePressedDo({helado.moverHacia(derecha)}, 25)
     keyboard.up().whilePressedDo({helado.moverHacia(arriba)}, 25)
@@ -49,32 +49,6 @@ object configuracion {
     helado.reiniciar()
     self.iniciar()
   }
-}
-object manejadorDeFrutas {
-
-  var property cantidadDeFrutas = 0
-  var property frutaActual = 0
-  const property frambuesasCreadas = []
-  const property uvasCreadas = []
-
-  /*
-  method crearFrutas() {
-    if (frutaActual=="frambuesa") {
-      self.crearUvas()
-    } else {
-      //acá iría la implementación de pasar de nivel o finalizar el juego
-    }
-  }
-  */
-  
-  
-  
-  
-
-  method moverUvas () {
-      uvasCreadas.forEach{uva => uva.movete()}
-  }
-
 }
 
 object manejadorDeEnemigos {
@@ -123,7 +97,6 @@ object cartelReintentar {
     game.clear()          // saca todos los visuals, teclas, ticks y colisiones
     helado.reiniciar()
     puntaje.reiniciar()
-    cantFrut.reiniciar()
     configuracion.iniciar()
   }
 }

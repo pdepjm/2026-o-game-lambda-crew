@@ -20,20 +20,11 @@ object puntaje inherits Ornamental{
   }
 }
 
-object cantFrut inherits Ornamental{
-  var property frutas = 0
+
+//Ahora esto solo es el cartel, no calcula nada 
+object cantFrut inherits Ornamental {
   method position() = game.at(0,14)
-  method text() = ("Frutas Comidas: "+ self.frutas() + "/" + manejadorDeFrutas.cantidadDeFrutas())
-  method sumarFruta() {
-    frutas += 1
-    if (frutas==manejadorDeFrutas.cantidadDeFrutas()) {
-      manejadorDeFrutas.crearFrutas()
-      self.reiniciar()
-    }
-  }
-  method reiniciar() {
-  frutas = 0
-  }
+  method text() = "Frutas Comidas: " + configuracion.nivelActual().frutasComidas() + "/" + configuracion.nivelActual().totalFrutas()
 }
 
 // las paredes las pasamos a clases asi creamos muchas asl crear niveles (queda ifual solo ponemos class)
