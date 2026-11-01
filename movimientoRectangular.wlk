@@ -1,5 +1,6 @@
 import direcciones.*
 import helado.*
+import manejadores.*
 
 class MovimientoRectangular {
 
@@ -23,7 +24,7 @@ class MovimientoRectangular {
 
     method moverA(destino) {                         
         // HAY QUE CAMBIAR QUE HELADO TENGA ESE METODO, ES RE GOD OBJECT 
-        if (helado.hayHieloEn(destino)) {   // hay hielo: se da vuelta
+        if (helado.hayHieloEn(destino) || configuracion.nivelActual().hayParedEn(destino)) {   // hay hielo: se da vuelta
             horario = !horario
             sentido = sentido.opuesta()
         } else {

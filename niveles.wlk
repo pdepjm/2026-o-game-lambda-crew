@@ -12,7 +12,6 @@ class Nivel {
     const property siguienteNivel
 
     const paredes = []
-    const enemigos = []
     var posicionInicialHelado = game.origin()
 
     //Para generar una y dsp la otra generamos todo junto pero solo mostramos las activas
@@ -26,7 +25,6 @@ class Nivel {
         paredes.clear() //de momento solo pares, si queremos borrar todo, abstraemos (self.clearpositions())
         frutasActivas.clear()
         frutasEnEspera.clear()
-        enemigos.clear()
         totalXFase = 0    
         self.dibujarMapa() // Si queremos poner menu lo tenemos que poner aca abajo
        
@@ -109,25 +107,7 @@ class Nivel {
     //================ FIN FRUTAS ===================
 
     // Igual que el Kiwi: la celda es la esquina superior izquierda del recorrido
-    method agregarEnemigo(x, y, lado) {
-        const recorrido = new MovimientoRectangular(
-            x = x, y = y,
-            lix = x, lsx = x + lado,
-            lsy = y, liy = y - lado
-        )
-        const enemigo = new Enemigo(position = game.at(x, y), movimiento = recorrido)
-        game.addVisual(enemigo)
-        enemigos.add(enemigo)
-    }
-
-    // misma logica que el kiwi, el nivel los mueve
-    method moverEnemigos() {
-        enemigos.forEach({ enemigo => enemigo.movete() })
-    }
-
-    // reemplaza al hayEnemigoEn del manejadorDeEnemigos
-    method hayEnemigoEn(destino) = enemigos.any({ enemigo => enemigo.position() == destino })
-
+    
     // misma lógica que hayHieloEn --> Lo sacamos de helado y lo ponemos aca 
     method hayParedEn(destino) = paredes.any({ pared => pared.position() == destino })
 
@@ -259,6 +239,4 @@ object finDelJuego {
   method totalFrutas() = 0
   method frutasComidas() = 0
   method moverFrutas() {}
-  method moverEnemigos() {}
-  method hayEnemigoEn(posicion) = false
 }
