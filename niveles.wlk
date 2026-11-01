@@ -130,6 +130,11 @@ class Nivel {
 
     // misma lógica que hayHieloEn --> Lo sacamos de helado y lo ponemos aca 
     method hayParedEn(destino) = paredes.any({ pared => pared.position() == destino })
+
+    method hayFrutaEn(destino) = frutasActivas.any({ fruta => fruta.position() == destino })
+  
+    // Este lo usamos para pedirle la fruta exacta y robarle la imagen
+    method frutaEn(destino) = frutasActivas.findOrDefault({ fruta => fruta.position() == destino }, null)
     
     method posicionInicialHelado(posicion) {
         posicionInicialHelado = posicion

@@ -6,12 +6,22 @@ import extras.*
 
 class Fruta {
 
-  method image() 
+  method image() {
+    if (manejadorDeHielo.hayHieloEn(self.position())) {
+      return self.imagenCongelada()
+    } else {
+      return self.imagenNormal()
+    }
+  }
+
+  method imagenNormal()
+  method imagenCongelada()
+
   var property position 
+
   method puntosOtorgados () 
   method movete() {} 
     //Por defecto no se mueven, cuando hago el kiwi lo sobreescribo
-
 
   method recibirChoqueDe(unHelado){
     game.removeVisual(self)
@@ -34,19 +44,22 @@ class FrutaRectangular inherits MovimientoRectangular {
 }
 
 class Frambuesa inherits Fruta {
-  override method image() = "placeholders/frambuesa.jpg"
+  override method imagenNormal() = "placeholders/frambuesa.jpg"
+  override method imagenCongelada() = "placeholders/frambuesaCongelada.png"
   override method puntosOtorgados() = 100
 }
 
 class Uva inherits Fruta {
-  override method image() = "placeholders/uva.png"
+  override method imagenNormal() = "placeholders/uva.png"
+  override method imagenCongelada() = "placeholders/uvaCongelada.png"
   override method puntosOtorgados() = 200
 }
 
 class Kiwi inherits Fruta {
   const movimiento    
 
-  override method image() = "placeholders/kiwi.jpg"
+  override method imagenNormal() = "placeholders/kiwi.jpg"
+  override method imagenCongelada() = "placeholders/kiwiCongelado.png"
   override method puntosOtorgados() = 300
 
   override method movete() {
