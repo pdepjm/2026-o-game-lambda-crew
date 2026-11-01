@@ -27,9 +27,12 @@ class Nivel {
         frutasEnEspera.clear()
         totalXFase = 0    
         self.dibujarMapa() // Si queremos poner menu lo tenemos que poner aca abajo
+        manejadorDeEnemigos.cargarEnemigos(self.crearEnemigos())
        
         helado.position(posicionInicialHelado) 
     }
+
+    method crearEnemigos() = []
 
     method dibujarMapa(){
         var y = game.height() - 1
@@ -169,7 +172,7 @@ object i { //hielo
 }
 //================== NIVELEEEEES =========================
 
-const nivel1 = new Nivel(
+object nivel1 inherits Nivel(
     initialGridMap = [
         [_,u,u,u,_,_,_,i,_,_,_,u,u,u,_], //1 
         [_,f,f,f,_,_,_,i,_,_,_,f,f,f,_], //2
@@ -188,9 +191,18 @@ const nivel1 = new Nivel(
         [h,u,u,u,_,_,_,i,_,_,_,u,u,u,_]  //1
     ], 
     siguienteNivel = nivel2
-) 
+){
+    override method crearEnemigos() {
+        return [
+            new EnemigoRectangular(x=0, lix=0, lsx=14, y=14, liy=0, lsy=14),
+            new EnemigoRectangular(x=14, lix=0, lsx=14, y=0, liy=0, lsy=14),
+            new EnemigoRectangular(x=4, lix=4, lsx=10, y=10, liy=4, lsy=10),
+            new EnemigoRectangular(x=10, lix=4, lsx=10, y=4, liy=4, lsy=10)
+        ]
+    }
+}
 
-const nivel2 = new Nivel(
+object nivel2 inherits Nivel(
     initialGridMap = [
         [k,_,_,_,_,_,_,_,_,_,k,_,_,_,_], //1 
         [_,p,p,i,i,i,i,i,i,i,i,i,p,p,_], //2
@@ -209,9 +221,18 @@ const nivel2 = new Nivel(
         [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_]  //1
     ], 
     siguienteNivel = nivel3
-) 
+){
+    override method crearEnemigos() {
+        return [
+            new EnemigoRectangular(x=0, lix=0, lsx=14, y=14, liy=0, lsy=14),
+            new EnemigoRectangular(x=14, lix=0, lsx=14, y=0, liy=0, lsy=14),
+            new EnemigoRectangular(x=4, lix=4, lsx=10, y=10, liy=4, lsy=10),
+            new EnemigoRectangular(x=10, lix=4, lsx=10, y=4, liy=4, lsy=10)
+        ]
+    }
+}
 
-const nivel3 = new Nivel(
+object nivel3 inherits Nivel(
     initialGridMap = [
         [_,u,u,u,_,_,_,_,_,_,_,u,u,u,_], //1 
         [_,f,f,f,_,_,_,_,_,_,_,f,f,f,_], //2
@@ -230,7 +251,16 @@ const nivel3 = new Nivel(
         [h,u,u,u,_,_,_,_,_,_,_,u,u,u,_]  //1
     ], 
     siguienteNivel = finDelJuego
-) 
+){
+    override method crearEnemigos() {
+        return [
+            new EnemigoRectangular(x=0, lix=0, lsx=14, y=14, liy=0, lsy=14),
+            new EnemigoRectangular(x=14, lix=0, lsx=14, y=0, liy=0, lsy=14),
+            new EnemigoRectangular(x=4, lix=4, lsx=10, y=10, liy=4, lsy=10),
+            new EnemigoRectangular(x=10, lix=4, lsx=10, y=4, liy=4, lsy=10)
+        ]
+    }
+}
 
 object finDelJuego {
   method iniciar() {}

@@ -35,7 +35,6 @@ object configuracion {
 
     game.onCollideDo(helado, {elemento => elemento.recibirChoqueDe(helado)})
 
-    manejadorDeEnemigos.crearEnemigosMovRect()
     
     // TEMPORAL, solo para probar q el nivel 2 se gebere bueb 
     //dsp vemos como hacer para que se genere al comer todas las frutas
@@ -54,8 +53,12 @@ object configuracion {
 
 object manejadorDeEnemigos {
     const listaDeEnemigos = []
-    // En primera instancia quería hacer addVisual y add enemigo a lista de enemigos todo junto, pero por errores en wollok
-    // lo tuve que hacer todo separado y queda muy largo el method. Es lo que hay por ahora
+    
+    method cargarEnemigos(nuevosEnemigos) {
+        listaDeEnemigos.clear()
+        listaDeEnemigos.addAll(nuevosEnemigos)
+        listaDeEnemigos.forEach({ enemigo => game.addVisual(enemigo) })
+    }
     method crearEnemigosMovRect () {
       listaDeEnemigos.clear()
       const enemigo1 = new EnemigoRectangular (x=0,lix=0,lsx=14,y=14,liy=0,lsy=14)
@@ -81,6 +84,7 @@ object manejadorDeEnemigos {
     method hayEnemigoEn(destino) { //para preguntar cuando creamos hielos
       return listaDeEnemigos.any({ enemigo => enemigo.position() == destino })
     }
+
 }
 object cartelReintentar {
   method position() = game.at(3, 7)
