@@ -23,10 +23,6 @@ object helado {
 
   method movimiento() {}
 
-  method cambiarVelocidad(nuevaVelocidad) {
-  velocidad = nuevaVelocidad
-}
-
 method terminarEnfriamiento() {
   enfriando = false
 }

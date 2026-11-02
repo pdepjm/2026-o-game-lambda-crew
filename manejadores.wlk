@@ -59,23 +59,6 @@ object manejadorDeEnemigos {
         listaDeEnemigos.addAll(nuevosEnemigos)
         listaDeEnemigos.forEach({ enemigo => game.addVisual(enemigo) })
     }
-    method crearEnemigosMovRect () {
-      listaDeEnemigos.clear()
-      const enemigo1 = new EnemigoRectangular (x=0,lix=0,lsx=14,y=14,liy=0,lsy=14)
-      const enemigo2 = new EnemigoRectangular (x=14,lix=0,lsx=14,y=0,liy=0,lsy=14)
-      const enemigo3 = new EnemigoRectangular (x=4,lix=4,lsx=10,y=10,liy=4,lsy=10)
-      const enemigo4 = new EnemigoRectangular (x=10,lix=4,lsx=10,y=4,liy=4,lsy=10)
-
-      game.addVisual (enemigo1)
-      game.addVisual (enemigo2)
-      game.addVisual (enemigo3)
-      game.addVisual (enemigo4)
-
-      listaDeEnemigos.add(enemigo1)
-      listaDeEnemigos.add(enemigo2)
-      listaDeEnemigos.add(enemigo3)
-      listaDeEnemigos.add(enemigo4)
-    }
 
     method moverEnemigos () {
       listaDeEnemigos.forEach{enemigo => enemigo.movete()}
