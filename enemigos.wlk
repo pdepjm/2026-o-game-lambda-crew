@@ -87,8 +87,8 @@ class EnemigoPerseguidorRompeHielo inherits EnemigoPerseguidor {
     var estaRompiendoHielo = false
 
     override method image() =
-        if (estaRompiendoHielo) "placeholders/enemigoRompedorRompiendo.jpg"
-        else "placeholders/enemigoRompedor.jpg"
+        if (estaRompiendoHielo) "placeholders/persegRompeRompiendo.png"
+        else "placeholders/rompeperseg.png"
 
     override method movete() {
         if (!estaRompiendoHielo) {
