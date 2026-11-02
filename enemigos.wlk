@@ -53,7 +53,7 @@ class EnemigoRompeHielo inherits EnemigoRectangular{
 class EnemigoPerseguidor {
     var property position
 
-    method image() = "placeholders/enemigo.jpg"   // cambiar cuando haya sprite propio
+    method image() = "placeholders/perseguidor.png"   // cambiar cuando haya sprite propio
 
     method recibirChoqueDe(unHelado) {
         unHelado.morir()

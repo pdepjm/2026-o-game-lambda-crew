@@ -26,6 +26,8 @@ class Hielo {
 class HieloResistente inherits Hielo {
     var golpesRestantes = 2
 
+    override method image() = "placeholders/ice.jpg"
+
     override method recibirGolpe() {
         golpesRestantes -= 1
     }
