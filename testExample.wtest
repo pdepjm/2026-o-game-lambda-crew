@@ -90,5 +90,69 @@ describe "hielo"{
     helado.continuarRompidaDeHielo()
     assert.notThat(manejadorDeHielo.hayHieloEn(game.at(1, 0)))
     assert.equals(0, game.getObjectsIn(game.at(1, 0)).size())
+  } 
+  
+  test "el helado no puede atravesar un hielo" {
+    manejadorDeHielo.crearHieloEn(game.at(1, 0))
+    helado.moverHacia(derecha)
+    assert.equals(game.at(0, 0), helado.position())
   }
 }
+
+ describe "enemigos" {
+
+  method initialize() {
+    game.clear()
+    game.width(15)
+    game.height(15)
+    helado.reiniciar()
+    manejadorDeEnemigos.cargarEnemigos([])
+  }
+
+  test "un enemigo rectangular mata al helado al chocar con él" {
+    const enemigo = new EnemigoRectangular(x=1, lix=0, lsx=14, y=1, liy=0, lsy=14)
+    enemigo.recibirChoqueDe(helado)
+    assert.notThat(helado.estaVivo())
+  }
+
+  test "un enemigo rectangular se da vuelta al chocar con un hielo" {
+    const enemigo = new EnemigoRectangular(x=5, lix=0, lsx=14, y=5, liy=0, lsy=14)
+    manejadorDeHielo.crearHieloEn(game.at(6, 5))
+    enemigo.movete()                              // choca con el hielo y cambia de sentido
+    assert.equals(game.at(5, 5), enemigo.position())
+    enemigo.movete()                              // ahora va hacia el otro lado
+    assert.equals(game.at(4, 5), enemigo.position())
+  }
+
+  test "el manejador mueve a enemigos de distinto tipo (polimorfismo)" {
+    helado.position(game.at(0, 0))
+    const rectangular = new EnemigoRectangular(x=5, lix=0, lsx=14, y=5, liy=0, lsy=14)
+    const perseguidor = new EnemigoPerseguidor(position = game.at(10, 5))
+    manejadorDeEnemigos.cargarEnemigos([rectangular, perseguidor])
+    manejadorDeEnemigos.moverEnemigos()
+    assert.equals(game.at(6, 5), rectangular.position())
+    assert.equals(game.at(9, 5), perseguidor.position())
+  }
+}
+
+
+describe "fases de frutas" {
+
+  method initialize() {
+    game.clear()
+    game.width(15)
+    game.height(15)
+    helado.reiniciar()
+    puntaje.reiniciar()
+  }
+
+  test "al comer todas las frambuesas aparecen las uvas" {
+    nivel1.agregarFrambuesa(3, 3)
+    nivel1.agregarUva(5, 5)
+    assert.notThat(nivel1.hayFrutaEn(game.at(5, 5)))   // todavía en espera
+    nivel1.frutaEn(game.at(3, 3)).recibirChoqueDe(helado)
+    assert.that(nivel1.hayFrutaEn(game.at(5, 5)))      // ahora activa
+    assert.equals(1, game.getObjectsIn(game.at(5, 5)).size())
+  }
+}
+

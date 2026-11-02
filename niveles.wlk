@@ -193,7 +193,7 @@ object nivel1 inherits Nivel(
         [_,_,_,_,_,_,_,i,_,f,f,_,_,_,_],
         [u,_,_,_,_,p,p,i,p,p,f,_,_,_,u],
         [u,_,_,_,_,p,u,_,u,p,_,_,_,_,u], // 7
-        [r,i,r,i,r,i,_,_,_,i,i,i,i,i,i], //CENTRO 
+        [i,i,i,i,i,i,_,_,_,i,i,i,i,i,i], //CENTRO 
         [u,_,_,_,_,p,u,_,u,p,_,_,_,_,u], //7
         [u,_,_,_,f,p,p,i,p,p,_,_,_,_,u],
         [_,_,_,_,f,f,_,i,_,_,_,_,_,_,_],
@@ -260,7 +260,7 @@ object nivel3 inherits Nivel(
         [_,f,f,f,_,_,_,_,_,_,_,f,f,f,_], //2
         [h,u,u,u,_,_,_,_,_,_,_,u,u,u,_]  //1
     ], 
-    siguienteNivel = finDelJuego
+    siguienteNivel = nivel4
 ){
     override method crearEnemigos() {
         return [
@@ -271,6 +271,40 @@ object nivel3 inherits Nivel(
 }
     
 }
+
+object nivel4 inherits Nivel(
+    initialGridMap = [
+        [_,u,u,u,_,_,_,_,_,_,_,u,u,u,_], //1 
+        [_,f,f,f,_,_,_,_,_,_,_,f,f,f,_], //2
+        [_,f,_,_,_,_,_,_,_,_,_,_,p,f,_], //3
+        [_,f,_,_,_,_,_,_,_,_,_,_,p,f,_], //4
+        [r,r,p,p,p,p,p,p,p,f,f,p,p,r,r],
+        [u,_,_,_,_,_,_,_,_,_,f,_,_,_,u],
+        [u,_,_,_,_,_,_,_,_,_,_,_,_,_,u], // 7
+        [u,_,_,_,_,_,_,_,_,_,_,_,_,_,u], //CENTRO 
+        [u,_,_,_,_,_,_,_,_,_,_,_,_,_,u], //7
+        [u,_,_,_,_,_,_,_,_,_,_,_,_,_,u],
+        [r,p,p,r,p,r,r,p,r,r,p,r,r,p,r],
+        [_,f,p,_,_,_,_,_,_,_,_,_,_,f,_], //4
+        [_,f,p,_,_,_,_,_,_,_,_,_,_,f,_], //3
+        [_,f,f,f,_,_,_,_,_,_,_,f,f,f,_], //2
+        [h,u,u,u,_,_,_,_,_,_,_,u,u,u,_]  //1
+    ], 
+    siguienteNivel = finDelJuego
+){
+    override method crearEnemigos() {
+        return [
+            new EnemigoRectangular(x=0, lix=0, lsx=14, y=14, liy=0, lsy=14),
+            new EnemigoRectangular(x=14, lix=0, lsx=14, y=0, liy=0, lsy=14),
+            new EnemigoPerseguidorRompeHielo(position = game.at(14, 14))
+        ]
+}
+    
+}
+
+
+
+
 
 object finDelJuego {
   method iniciar() {}

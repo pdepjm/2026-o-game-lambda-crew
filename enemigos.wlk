@@ -82,3 +82,37 @@ class EnemigoPerseguidor {
 }
 
 
+// Perseguidor que, si el hielo le tapa el camino, lo rompe
+class EnemigoPerseguidorRompeHielo inherits EnemigoPerseguidor {
+    var estaRompiendoHielo = false
+
+    override method image() =
+        if (estaRompiendoHielo) "placeholders/enemigoRompedorRompiendo.jpg"
+        else "placeholders/enemigoRompedor.jpg"
+
+    override method movete() {
+        if (!estaRompiendoHielo) {
+            const direcciones = self.direccionesHaciaHelado()
+            if (!direcciones.isEmpty() && self.hayHieloAl(direcciones.first())) {
+                self.romperHieloAl(direcciones.first())
+            } else {
+                super()
+            }
+        }
+    }
+
+    method hayHieloAl(direccion) =
+        manejadorDeHielo.hayHieloEn(direccion.posicionSiguiente(position))
+
+    method romperHieloAl(direccion) {
+        const destino = direccion.posicionSiguiente(position)
+        estaRompiendoHielo = true
+        game.schedule(2000, {
+            if (manejadorDeHielo.hayHieloEn(destino)) {
+                manejadorDeHielo.romperHieloEn(destino)
+            }
+            estaRompiendoHielo = false
+        })
+    }
+}
+
