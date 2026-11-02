@@ -248,8 +248,8 @@ object nivel3 inherits Nivel(
         [_,f,f,f,_,_,_,_,_,_,_,f,f,f,_], //2
         [_,f,_,_,_,_,_,_,_,_,_,_,p,f,_], //3
         [_,f,_,_,_,_,_,_,_,_,_,_,p,f,_], //4
-        [r,r,p,p,p,p,p,p,p,f,f,p,p,r,r],
-        [u,_,_,_,_,_,_,_,_,_,f,_,_,_,u],
+        [r,r,p,p,p,p,p,p,p,_,_,p,p,r,r],
+        [u,_,_,_,_,_,_,_,_,_,_,_,_,_,u],
         [u,_,_,_,_,_,_,_,_,_,_,_,_,_,u], // 7
         [u,_,_,_,_,_,_,_,_,_,_,_,_,_,u], //CENTRO 
         [u,_,_,_,_,_,_,_,_,_,_,_,_,_,u], //7
@@ -274,28 +274,30 @@ object nivel3 inherits Nivel(
 
 object nivel4 inherits Nivel(
     initialGridMap = [
-        [_,u,u,u,_,_,_,_,_,_,_,u,u,u,_], //1 
-        [_,f,f,f,_,_,_,_,_,_,_,f,f,f,_], //2
-        [_,f,_,_,_,_,_,_,_,_,_,_,p,f,_], //3
-        [_,f,_,_,_,_,_,_,_,_,_,_,p,f,_], //4
-        [r,r,p,p,p,p,p,p,p,f,f,p,p,r,r],
-        [u,_,_,_,_,_,_,_,_,_,f,_,_,_,u],
-        [u,_,_,_,_,_,_,_,_,_,_,_,_,_,u], // 7
-        [u,_,_,_,_,_,_,_,_,_,_,_,_,_,u], //CENTRO 
-        [u,_,_,_,_,_,_,_,_,_,_,_,_,_,u], //7
-        [u,_,_,_,_,_,_,_,_,_,_,_,_,_,u],
-        [r,p,p,r,p,r,r,p,r,r,p,r,r,p,r],
-        [_,f,p,_,_,_,_,_,_,_,_,_,_,f,_], //4
-        [_,f,p,_,_,_,_,_,_,_,_,_,_,f,_], //3
-        [_,f,f,f,_,_,_,_,_,_,_,f,f,f,_], //2
-        [h,u,u,u,_,_,_,_,_,_,_,u,u,u,_]  //1
+        [u,u,_,_,_,_,_,_,_,_,_,_,_,u,u], //1 
+        [u,p,f,p,_,p,_,_,_,p,_,p,f,p,u], //2
+        [_,i,f,i,_,i,_,_,_,i,_,i,f,i,_], //3
+        [_,p,f,p,_,p,_,_,_,p,_,p,f,p,_], //4
+        [_,i,f,i,_,i,_,_,_,i,_,i,f,i,_],
+        [_,p,f,p,_,p,_,r,_,p,_,p,f,p,_],
+        [_,_,_,_,_,_,r,u,r,_,_,_,_,_,_], // 7
+        [_,_,_,_,_,r,u,u,u,r,_,_,_,_,_], //CENTRO 
+        [_,_,_,_,_,_,r,u,r,_,_,_,_,_,_], //7
+        [_,p,f,p,_,p,_,r,_,p,_,p,f,p,_],
+        [_,i,f,i,_,i,_,_,_,i,_,i,f,i,_],
+        [_,p,f,p,_,p,_,_,_,p,_,p,f,p,_], //4
+        [_,i,f,i,_,i,_,h,_,i,_,i,f,i,_], //3
+        [u,p,f,p,_,p,_,_,_,p,_,p,f,p,u], //2
+        [u,u,_,_,_,_,_,_,_,_,_,_,_,u,u]  //1
     ], 
     siguienteNivel = finDelJuego
 ){
     override method crearEnemigos() {
         return [
-            new EnemigoRectangular(x=0, lix=0, lsx=14, y=14, liy=0, lsy=14),
-            new EnemigoRectangular(x=14, lix=0, lsx=14, y=0, liy=0, lsy=14),
+            new EnemigoRompeHielo(x=0, lix=0, lsx=14, y=14, liy=0, lsy=14),
+            new EnemigoRompeHielo(x=14, lix=0, lsx=14, y=0, liy=0, lsy=14),
+            new EnemigoRompeHielo(x=10, lix=4, lsx=10, y=4, liy=4, lsy=10),
+            new EnemigoRompeHielo(x=4, lix=4, lsx=10, y=10, liy=4, lsy=10),
             new EnemigoPerseguidorRompeHielo(position = game.at(14, 14))
         ]
 }
