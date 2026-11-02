@@ -22,9 +22,8 @@ class MovimientoRectangular {
         sentido.mover(self)
     }
 
-    method moverA(destino) {                         
-        // HAY QUE CAMBIAR QUE HELADO TENGA ESE METODO, ES RE GOD OBJECT 
-        if (helado.hayHieloEn(destino) || configuracion.nivelActual().hayParedEn(destino)) {   // hay hielo: se da vuelta
+    method moverA(destino) {
+        if (manejadorDeHielo.hayHieloEn(destino) || configuracion.nivelActual().hayParedEn(destino)) {   // hay hielo: se da vuelta
             horario = !horario
             sentido = sentido.opuesta()
         } else {

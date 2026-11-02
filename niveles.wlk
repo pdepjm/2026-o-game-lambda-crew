@@ -224,10 +224,8 @@ object nivel2 inherits Nivel(
 ){
     override method crearEnemigos() {
         return [
-            new EnemigoRectangular(x=0, lix=0, lsx=14, y=14, liy=0, lsy=14),
-            new EnemigoRectangular(x=14, lix=0, lsx=14, y=0, liy=0, lsy=14),
-            new EnemigoRectangular(x=4, lix=4, lsx=10, y=10, liy=4, lsy=10),
-            new EnemigoRectangular(x=10, lix=4, lsx=10, y=4, liy=4, lsy=10)
+            new EnemigoRompeHielo(x=0, lix=0, lsx=14, y=14, liy=0, lsy=14),
+            new EnemigoRompeHielo(x=14, lix=0, lsx=14, y=0, liy=0, lsy=14)
         ]
     }
 }
