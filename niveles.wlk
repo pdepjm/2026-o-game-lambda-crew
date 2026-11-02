@@ -126,6 +126,10 @@ class Nivel {
      method agregarHielo(x, y) {
         manejadorDeHielo.crearHieloEn(game.at(x, y))
     }
+
+    method agregarHieloResistente(x, y) {
+        manejadorDeHielo.crearHieloResistenteEn(game.at(x, y))
+    }
 }
 
 // ---------- Celdas (todas polimórficas jsjs: entienden decode) ----------
@@ -170,6 +174,14 @@ object i { //hielo
     nivel.agregarHielo(x, y)
   }
 }
+
+object r { //hielo resistente
+    method decode(x, y, nivel) {
+        nivel.agregarHieloResistente(x, y)
+    }
+}
+
+
 //================== NIVELEEEEES =========================
 
 object nivel1 inherits Nivel(
@@ -181,7 +193,7 @@ object nivel1 inherits Nivel(
         [_,_,_,_,_,_,_,i,_,f,f,_,_,_,_],
         [u,_,_,_,_,p,p,i,p,p,f,_,_,_,u],
         [u,_,_,_,_,p,u,_,u,p,_,_,_,_,u], // 7
-        [i,i,i,i,i,i,_,_,_,i,i,i,i,i,i], //CENTRO 
+        [r,i,r,i,r,i,_,_,_,i,i,i,i,i,i], //CENTRO 
         [u,_,_,_,_,p,u,_,u,p,_,_,_,_,u], //7
         [u,_,_,_,f,p,p,i,p,p,_,_,_,_,u],
         [_,_,_,_,f,f,_,i,_,_,_,_,_,_,_],
@@ -234,17 +246,17 @@ object nivel3 inherits Nivel(
     initialGridMap = [
         [_,u,u,u,_,_,_,_,_,_,_,u,u,u,_], //1 
         [_,f,f,f,_,_,_,_,_,_,_,f,f,f,_], //2
-        [_,f,_,_,_,_,_,_,_,_,_,_,_,f,_], //3
-        [_,f,_,_,_,_,_,_,_,_,_,_,_,f,_], //4
-        [_,_,_,_,_,_,_,_,_,f,f,_,_,_,_],
+        [_,f,_,_,_,_,_,_,_,_,_,_,p,f,_], //3
+        [_,f,_,_,_,_,_,_,_,_,_,_,p,f,_], //4
+        [r,r,p,p,p,p,p,p,p,f,f,p,p,r,r],
         [u,_,_,_,_,_,_,_,_,_,f,_,_,_,u],
         [u,_,_,_,_,_,_,_,_,_,_,_,_,_,u], // 7
         [u,_,_,_,_,_,_,_,_,_,_,_,_,_,u], //CENTRO 
         [u,_,_,_,_,_,_,_,_,_,_,_,_,_,u], //7
         [u,_,_,_,_,_,_,_,_,_,_,_,_,_,u],
-        [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_],
-        [_,f,_,_,_,_,_,_,_,_,_,_,_,f,_], //4
-        [_,f,_,_,_,_,_,_,_,_,_,_,_,f,_], //3
+        [r,p,p,r,p,r,r,p,r,r,p,r,r,p,r],
+        [_,f,p,_,_,_,_,_,_,_,_,_,_,f,_], //4
+        [_,f,p,_,_,_,_,_,_,_,_,_,_,f,_], //3
         [_,f,f,f,_,_,_,_,_,_,_,f,f,f,_], //2
         [h,u,u,u,_,_,_,_,_,_,_,u,u,u,_]  //1
     ], 
@@ -254,10 +266,10 @@ object nivel3 inherits Nivel(
         return [
             new EnemigoRectangular(x=0, lix=0, lsx=14, y=14, liy=0, lsy=14),
             new EnemigoRectangular(x=14, lix=0, lsx=14, y=0, liy=0, lsy=14),
-            new EnemigoRectangular(x=4, lix=4, lsx=10, y=10, liy=4, lsy=10),
-            new EnemigoRectangular(x=10, lix=4, lsx=10, y=4, liy=4, lsy=10)
+            new EnemigoPerseguidor(position = game.at(14, 14))
         ]
-    }
+}
+    
 }
 
 object finDelJuego {

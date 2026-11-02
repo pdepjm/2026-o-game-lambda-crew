@@ -49,4 +49,36 @@ class EnemigoRompeHielo inherits EnemigoRectangular{
 }
 
 
+// Enemigo que persigue al helado
+class EnemigoPerseguidor {
+    var property position
+
+    method image() = "placeholders/enemigo.jpg"   // cambiar cuando haya sprite propio
+
+    method recibirChoqueDe(unHelado) {
+        unHelado.morir()
+    }
+
+    method movete() {
+        position = self.direccionesHaciaHelado()
+            .map({ direccion => direccion.posicionSiguiente(position) })
+            .findOrDefault({ destino => self.puedeIrA(destino) }, position)
+    }
+
+    // Devuelve las direcciones que acercan al helado, la del eje más lejano primero.
+    // Si la primera está bloqueada, prueba la segunda: así no se traba contra una pared.
+    method direccionesHaciaHelado() {
+        const dx = helado.position().x() - position.x()
+        const dy = helado.position().y() - position.y()
+        const horizontales = if (dx > 0) [derecha] else if (dx < 0) [izquierda] else []
+        const verticales = if (dy > 0) [arriba] else if (dy < 0) [abajo] else []
+        return if (dx.abs() >= dy.abs()) horizontales + verticales else verticales + horizontales
+    }
+
+    method puedeIrA(destino) =
+        helado.estaDentroDelTablero(destino) &&
+        !configuracion.nivelActual().hayParedEn(destino) &&
+        !manejadorDeHielo.hayHieloEn(destino)
+}
+
 

@@ -117,12 +117,6 @@ object manejadorDeHielo {
     }
   }
 
-  method crearHieloEn(destino) {
-    const hielo = new Hielo(position = destino)
-    hielos.add(hielo)
-    game.addVisual(hielo)
-  }
-
   method hayHieloEn(destino) {
     return hielos.any({ hielo => hielo.position() == destino })
   }
@@ -131,11 +125,27 @@ object manejadorDeHielo {
     return hielos.find({ hielo => hielo.position() == destino })
   }
 
-  method romperHieloEn(destino) {
-    const hielo = self.hieloEn(destino)
-    hielos.remove(hielo)
-    game.removeVisual(hielo)
-  }
+    method crearHieloEn(destino) {
+        self.agregarHielo(new Hielo(position = destino))
+    }
+
+    method crearHieloResistenteEn(destino) {
+        self.agregarHielo(new HieloResistente(position = destino))
+    }
+
+    method agregarHielo(hielo) {
+        hielos.add(hielo)
+        game.addVisual(hielo)
+    }
+
+    method romperHieloEn(destino) {
+        const hielo = self.hieloEn(destino)
+        hielo.recibirGolpe()
+        if (hielo.estaRoto()) {
+            hielos.remove(hielo)
+            game.removeVisual(hielo)
+        }
+    }
 
   method reiniciar() {
     hielos.clear()

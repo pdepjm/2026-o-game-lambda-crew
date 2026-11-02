@@ -16,6 +16,7 @@ object helado {
   var direccionActual = derecha
   var siguientePosicionHielo = game.origin()
   var direccionDeLaTira = derecha
+  var efectosAplicados = 0
 
 
   method image() = imagen
@@ -92,6 +93,7 @@ method terminarEnfriamiento() {
         imagen = "placeholders/helado.png"
         manejadorDeHielo.reiniciar()                
         direccionActual = derecha 
+        efectosAplicados += 1   // invalida cualquier efecto pendiente
     }
 
     method posicionParaHielo() {
@@ -135,5 +137,14 @@ method terminarEnfriamiento() {
             siguientePosicionHielo = direccionDeLaTira.posicionSiguiente(destino)
             game.schedule(200, { self.continuarRompidaDeHielo() })
         }
+    }
+
+    method cambiarVelocidadTemporalmente(unaVelocidad, duracion) {
+        velocidad = unaVelocidad
+        efectosAplicados += 1
+        const efectoActual = efectosAplicados
+        game.schedule(duracion, { 
+            if (efectosAplicados == efectoActual) velocidad = normal 
+        })
     }
 }
