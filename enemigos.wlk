@@ -25,7 +25,13 @@ class EnemigoRompeHielo inherits EnemigoRectangular{
     } else {
       return self.imagenNormal()
     }
+
   }
+  override method movete() {
+  if (!estaRompiendoHielo) {
+    super()
+  }
+}
 
   method imagenRompedora() = "placeholders/enemigoRompedorRompiendo.jpg"
   method imagenNormal() = "placeholders/enemigoRompedor.jpg"

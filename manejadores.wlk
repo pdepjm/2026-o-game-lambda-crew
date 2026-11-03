@@ -68,7 +68,7 @@ object manejadorDeEnemigos {
     }
 
 }
-object cartelReintentar {
+object cartelReintentar inherits Ornamental {
   method position() = game.at(3, 7)
   method text() = "GAME OVER - Apretá R para reintentar"
   method textColor() = "FF0000FF"   // rojo

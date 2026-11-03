@@ -1,6 +1,7 @@
 import manejadores.*
+import extras.*
 
-class Hielo {
+class Hielo inherits Ornamental {
     var property position
     var roto = false
 

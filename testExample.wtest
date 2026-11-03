@@ -8,6 +8,7 @@ import extras.*
 import niveles.*
 import movimientoRectangular.*
 import enemigos.*
+import velocidades.*
 
 
   /* 
@@ -43,10 +44,15 @@ describe "movimiento del helado" {
 }
 
 describe "funcionamiento de los PowerUps" {
+  const acelerador = new ModificadorDeVelocidad(imagen = "placeholders/diesel.jpg", x = 3, y = 3, velocidad = veloz)
+  const relentizador = new ModificadorDeVelocidad(imagen = "placeholders/copito.jpg", x = 4, y = 4, velocidad = lento)
+
   test "cuando un powerUp recibe un choque del helado desaparece" {
+    game.addVisual(acelerador)
     acelerador.recibirChoqueDe(helado)
     assert.equals(0, game.getObjectsIn(acelerador.position()).size())
   }
+
   test "cuando un helado agarra un acelerador se mueve más rápido que antes de agarrarlo" {
     const velInicial = helado.velocidad()
     const intInicial = velInicial.intervalo()
