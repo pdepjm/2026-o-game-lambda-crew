@@ -20,7 +20,7 @@ object helado {
 
 
   method image() = imagen
-
+    method estaVivo() = vivo
   method movimiento() {}
 
 method terminarEnfriamiento() {

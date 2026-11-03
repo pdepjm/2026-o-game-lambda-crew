@@ -5,6 +5,8 @@ import frutas.*
 import manejadores.*
 import movimientoRectangular.*
 import enemigos.*
+import velocidades.*
+import powerUps.*
 
 class Nivel {
     const initialGridMap
@@ -130,6 +132,14 @@ class Nivel {
     method agregarHieloResistente(x, y) {
         manejadorDeHielo.crearHieloResistenteEn(game.at(x, y))
     }
+
+    method agregarAcelerador(x, y) {
+    game.addVisual(new ModificadorDeVelocidad(imagen = "placeholders/diesel.jpg", x = x, y = y, velocidad = veloz))
+}
+
+    method agregarRelentizador(x, y) {
+    game.addVisual(new ModificadorDeVelocidad(imagen = "placeholders/copito.jpg", x = x, y = y, velocidad = lento))
+}
 }
 
 // ---------- Celdas (todas polimórficas jsjs: entienden decode) ----------
@@ -181,6 +191,18 @@ object r { //hielo resistente
     }
 }
 
+object a { //acelerador
+  method decode(x, y, nivel) {
+    nivel.agregarAcelerador(x, y)
+  }
+}
+
+object l { //relentizador
+  method decode(x, y, nivel) {
+    nivel.agregarRelentizador(x, y)
+  }
+}
+
 
 //================== NIVELEEEEES =========================
 
@@ -188,7 +210,7 @@ object nivel1 inherits Nivel(
     initialGridMap = [
         [_,u,u,u,_,_,_,i,_,_,_,u,u,u,_], //1 
         [_,f,f,f,_,_,_,i,_,_,_,f,f,f,_], //2
-        [_,f,_,_,_,_,_,i,_,_,_,_,_,f,_], //3
+        [_,f,_,_,a,_,_,i,_,_,l,_,_,f,_], //3
         [_,f,_,_,_,_,_,i,_,_,_,_,_,f,_], //4
         [_,_,_,_,_,_,_,i,_,f,f,_,_,_,_],
         [u,_,_,_,_,p,p,i,p,p,f,_,_,_,u],
@@ -197,7 +219,7 @@ object nivel1 inherits Nivel(
         [u,_,_,_,_,p,u,_,u,p,_,_,_,_,u], //7
         [u,_,_,_,f,p,p,i,p,p,_,_,_,_,u],
         [_,_,_,_,f,f,_,i,_,_,_,_,_,_,_],
-        [_,f,_,_,_,_,_,i,_,_,_,_,_,f,_], //4
+        [_,f,_,_,l,_,_,i,_,_,a,_,_,f,_], //4
         [_,f,_,_,_,_,_,i,_,_,_,_,_,f,_], //3
         [_,f,f,f,_,_,_,i,_,_,_,f,f,f,_], //2
         [h,u,u,u,_,_,_,i,_,_,_,u,u,u,_]  //1
@@ -218,17 +240,17 @@ object nivel2 inherits Nivel(
     initialGridMap = [
         [k,_,_,_,_,_,_,_,_,_,k,_,_,_,_], //1 
         [_,p,p,i,i,i,i,i,i,i,i,i,p,p,_], //2
-        [_,p,_,_,_,_,f,f,f,_,_,_,_,p,_], //3
+        [_,p,a,_,_,_,f,f,f,_,_,_,_,p,_], //3
         [_,i,_,_,_,_,f,f,f,_,_,_,_,i,_], //4
         [_,i,_,_,_,_,_,_,_,_,_,_,_,i,_],
-        [k,i,_,_,_,p,p,p,p,p,k,_,_,i,_],
+        [k,i,_,_,_,p,p,p,p,p,k,l,_,i,_],
         [_,i,_,_,_,p,_,_,_,p,_,_,_,i,_], // 7
         [k,i,_,_,_,_,_,h,_,_,k,_,_,i,_], //CENTRO 
-        [_,i,_,_,_,p,_,_,_,p,_,_,_,i,_], //7
+        [_,i,_,_,_,p,_,_,_,p,a,_,_,i,_], //7
         [_,i,_,_,_,p,p,p,p,p,_,_,_,i,_],
         [k,i,_,_,_,_,_,_,_,_,k,_,_,i,_],
         [_,i,_,_,_,_,f,f,f,_,_,_,_,i,_], //4
-        [_,p,_,_,_,_,f,f,f,_,_,_,_,p,_], //3
+        [_,p,_,_,_,_,f,f,f,_,_,_,l,p,_], //3
         [_,p,p,i,i,i,i,i,i,i,i,i,p,p,_], //2
         [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_]  //1
     ], 
@@ -249,14 +271,14 @@ object nivel3 inherits Nivel(
         [_,f,_,_,_,_,_,_,_,_,_,_,p,f,_], //3
         [_,f,_,_,_,_,_,_,_,_,_,_,p,f,_], //4
         [r,r,p,p,p,p,p,p,p,_,_,p,p,r,r],
-        [u,_,_,_,_,_,_,_,_,_,_,_,_,_,u],
+        [u,_,_,_,_,_,_,_,_,l,l,_,_,_,u],
         [u,_,_,_,_,_,_,_,_,_,_,_,_,_,u], // 7
         [u,_,_,_,_,_,_,_,_,_,_,_,_,_,u], //CENTRO 
         [u,_,_,_,_,_,_,_,_,_,_,_,_,_,u], //7
         [u,_,_,_,_,_,_,_,_,_,_,_,_,_,u],
         [r,p,p,r,p,r,r,p,r,r,p,r,r,p,r],
         [_,f,p,_,_,_,_,_,_,_,_,_,_,f,_], //4
-        [_,f,p,_,_,_,_,_,_,_,_,_,_,f,_], //3
+        [_,f,p,_,_,_,a,_,_,_,_,_,_,f,_], //3
         [_,f,f,f,_,_,_,_,_,_,_,f,f,f,_], //2
         [h,u,u,u,_,_,_,_,_,_,_,u,u,u,_]  //1
     ], 
@@ -274,21 +296,21 @@ object nivel3 inherits Nivel(
 
 object nivel4 inherits Nivel(
     initialGridMap = [
-        [u,u,_,_,_,_,_,_,_,_,_,_,_,u,u], //1 
+        [u,u,a,_,_,_,_,l,_,_,_,_,_,u,u], //1 
         [u,p,f,p,_,p,_,_,_,p,_,p,f,p,u], //2
         [_,i,f,i,_,i,_,_,_,i,_,i,f,i,_], //3
-        [_,p,f,p,_,p,_,_,_,p,_,p,f,p,_], //4
+        [_,p,f,p,_,p,_,l,_,p,_,p,f,p,_], //4
         [_,i,f,i,_,i,_,_,_,i,_,i,f,i,_],
         [_,p,f,p,_,p,_,r,_,p,_,p,f,p,_],
         [_,_,_,_,_,_,r,u,r,_,_,_,_,_,_], // 7
-        [_,_,_,_,_,r,u,u,u,r,_,_,_,_,_], //CENTRO 
+        [_,_,a,_,_,r,u,u,u,r,_,_,a,_,_], //CENTRO 
         [_,_,_,_,_,_,r,u,r,_,_,_,_,_,_], //7
         [_,p,f,p,_,p,_,r,_,p,_,p,f,p,_],
         [_,i,f,i,_,i,_,_,_,i,_,i,f,i,_],
-        [_,p,f,p,_,p,_,_,_,p,_,p,f,p,_], //4
+        [_,p,f,p,_,p,_,l,_,p,_,p,f,p,_], //4
         [_,i,f,i,_,i,_,h,_,i,_,i,f,i,_], //3
         [u,p,f,p,_,p,_,_,_,p,_,p,f,p,u], //2
-        [u,u,_,_,_,_,_,_,_,_,_,_,_,u,u]  //1
+        [u,u,_,_,_,_,_,l,_,_,_,_,a,u,u]  //1
     ], 
     siguienteNivel = finDelJuego
 ){

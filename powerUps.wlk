@@ -20,6 +20,3 @@ class ModificadorDeVelocidad {
         self.aplicarEfecto(unMovil)
     }
 }
-
-const acelerador = new ModificadorDeVelocidad(imagen = "placeholders/diesel.jpg", x = 13, y = 13, velocidad = veloz)
-const relentizador = new ModificadorDeVelocidad(imagen = "placeholders/copito.jpg", x = 6, y = 6, velocidad = lento)

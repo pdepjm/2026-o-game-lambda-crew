@@ -21,8 +21,7 @@ object configuracion {
     //game.addVisual(p) --> Lo sacamos pq ahora lo hace nivel 
     game.addVisual(puntaje)
     game.addVisual(cantFrut)
-    game.addVisual(acelerador)
-    game.addVisual(relentizador)
+
 
     tick.start()
     tick2.start()
