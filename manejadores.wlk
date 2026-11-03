@@ -115,19 +115,28 @@ object manejadorDeHielo {
         self.agregarHielo(new HieloResistente(position = destino))
     }
 
-    method agregarHielo(hielo) {
-        hielos.add(hielo)
-        game.addVisual(hielo)
-    }
+  method agregarHielo(hielo) {
+    hielos.add(hielo)
+    game.addVisual(hielo)
+    self.refrescarEn(hielo.position()) // señal de q aparecio un iceFrioHielo  
+  }
 
-    method romperHieloEn(destino) {
-        const hielo = self.hieloEn(destino)
-        hielo.recibirGolpe()
-        if (hielo.estaRoto()) {
-            hielos.remove(hielo)
-            game.removeVisual(hielo)
-        }
+  //avisa que cambio algo en la celda --> apareció un hielo 
+  method refrescarEn(posicion) {
+    if (self.hayHieloEn(posicion)) {
+      self.hieloEn(posicion).actualizarImagen()
     }
+    configuracion.nivelActual().refrescarCongelamientoEn(posicion)
+  }
+  method romperHieloEn(destino) {
+      const hielo = self.hieloEn(destino)
+      hielo.recibirGolpe()
+      if (hielo.estaRoto()) {
+          hielos.remove(hielo)
+          game.removeVisual(hielo)
+      }
+    self.refrescarEn(destino)
+  }
 
   method reiniciar() {
     hielos.clear()

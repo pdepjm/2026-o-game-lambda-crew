@@ -5,13 +5,14 @@ import extras.*
 
 
 class Fruta {
+  //Para saber que foto poner, si la congelada o la normal
+  var congelada = false
 
-  method image() {
-    if (manejadorDeHielo.hayHieloEn(self.position())) {
-      return self.imagenCongelada()
-    } else {
-      return self.imagenNormal()
-    }
+  //Sistema de congelamiento para q evitemos el lag q hacia la otra forma 
+  method image() = if (congelada) self.imagenCongelada() else self.imagenNormal()
+
+  method actualizarCongelamiento() {
+    congelada = manejadorDeHielo.hayHieloEn(position)
   }
 
   method imagenNormal()
@@ -63,7 +64,12 @@ class Kiwi inherits Fruta {
   override method puntosOtorgados() = 300
 
   override method movete() {
+    const anterior = position
     movimiento.movete()
     position = movimiento.position()   // sincronizo mi posición con la del recorrido
+    //aviso a la celda q me moví 
+      //basicamente es para que el hielo de ahí no quede con la imagen congelada de un kiwi que ya no está
+    self.actualizarCongelamiento()
+    manejadorDeHielo.refrescarEn(anterior)
   }
 }
