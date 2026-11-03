@@ -37,11 +37,7 @@ method terminarEfecto() {
     }
 
     method moverA(destino) {
-        if (vivo &&
-            self.estaDentroDelTablero(destino) &&
-            !self.hayHieloEn(destino) &&
-            !self.hayParedEn(destino)
-            ) {
+        if (self.habilitado(destino) && self.noHayBloques(destino)) {
             position = destino
         }
     }
@@ -59,7 +55,7 @@ method terminarEfecto() {
 
     method crearHielo() {
         const destino = self.posicionParaHielo()
-        if (vivo && self.estaDentroDelTablero(destino) && !self.hayHieloEn(destino)) {
+        if (self.habilitado(destino) && !self.hayHieloEn(destino)) {
             self.crearHieloEn(destino)
         }
     }
@@ -101,10 +97,14 @@ method terminarEfecto() {
         siguientePosicionHielo = self.posicionParaHielo()
     }
 
+    method habilitado (destino) = vivo && self.estaDentroDelTablero(destino)
+
+    method noHayBloques (destino) = !self.hayHieloEn(destino) && !self.hayParedEn(destino)
+
     method continuarTiraDeHielo() {
         const destino = siguientePosicionHielo
 
-        if (vivo && self.estaDentroDelTablero(destino) && !self.hayHieloEn(destino)&&  !manejadorDeEnemigos.hayEnemigoEn(destino) && !self.hayParedEn(destino)) {
+        if (self.habilitado(destino) && self.noHayBloques(destino) && !manejadorDeEnemigos.hayEnemigoEn(destino)) {
             self.crearHieloEn(destino)
             siguientePosicionHielo =
             direccionDeLaTira.posicionSiguiente(destino)
@@ -128,7 +128,7 @@ method terminarEfecto() {
     method continuarRompidaDeHielo() {
         const destino = siguientePosicionHielo
 
-        if (vivo && self.estaDentroDelTablero(destino) && self.hayHieloEn(destino)) {
+        if (self.habilitado(destino) && self.hayHieloEn(destino)) {
             self.romperHieloEn(destino)
             siguientePosicionHielo = direccionDeLaTira.posicionSiguiente(destino)
             game.schedule(200, { self.continuarRompidaDeHielo() })
