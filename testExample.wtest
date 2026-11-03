@@ -11,30 +11,27 @@ import enemigos.*
 import velocidades.*
 
 
-  /* 
-  describe "consumisición de frutas" 
-  const frut = new Fruta(x = 3, y = 3, imagen = "placeholders/frambuesa.jpg", puntos = 100)
-    test "cuando la fruta recibe un choque del helado aumenta en 1 el contador de frutas comidas" {
-    frut.recibirChoqueDe(helado)
-    assert.equals(1,cantFrut.frutas())
-  }
   
-  test "cuando la fruta recibe un choque del helado desaparece" {
-    frut.recibirChoqueDe(helado)
-    assert.equals(0, game.getObjectsIn(frut.position()).size())
+  describe "consumisición de frutas" {
+    
+    test "cuando la fruta recibe un choque del helado desaparece" {
+      const fruta = new Frambuesa (position = game.at(1,1))
+      fruta.recibirChoqueDe(helado)
+      assert.equals(0, game.getObjectsIn(fruta.position()).size())
+    }
+  
+    test "cuando cada fruta recibe un choque del helado suma la cantidad de puntos correspondiente a la fruta en cuestión" {
+      const fruta = new Frambuesa (position = game.at(1,1))
+      const fruta2 = new Uva (position = game.at(2,2))
+      const fruta3 = new Kiwi (position = game.at(3,3), movimiento = derecha)
+      fruta.recibirChoqueDe(helado)
+      assert.equals(fruta.puntosOtorgados(), puntaje.puntos())
+      fruta2.recibirChoqueDe(helado)
+      assert.equals(fruta2.puntosOtorgados(), puntaje.puntos() - fruta.puntosOtorgados())
+      fruta3.recibirChoqueDe(helado)
+      assert.equals(fruta3.puntosOtorgados(), puntaje.puntos() - fruta.puntosOtorgados() - fruta2.puntosOtorgados())
+    }
   }
-
-  test "cuando la fruta recibe un choque del helado suma la cantidad de puntos correspondiente a la fruta" {
-    frut.recibirChoqueDe(helado)
-    assert.equals(frut.puntosOtorgados(), puntaje.puntos())
-  }
-
-  test "cuando se agarran todas las frambuesas aparecen uvas" {
-    manejadorDeFrutas.agregarFrambuesas()
-    manejadorDeFrutas.frambuesasCreadas().forEach{frambuesa => frambuesa.recibirChoqueDe(helado)}
-    assert.equals("uva",manejadorDeFrutas.frutaActual())
-  }
-  */
 
 describe "movimiento del helado" {
   test "al ir a la derecha avanza una casilla" {
@@ -104,6 +101,17 @@ describe "hielo"{
     helado.moverHacia(derecha)
     assert.equals(game.at(0, 0), helado.position())
   }
+
+  test "el hielo resistente NO se rompe a la primera, más SI a la segunda" {
+    manejadorDeHielo.crearHieloResistenteEn(game.at(1, 0))
+    helado.iniciarRompidaDeHielo()
+    helado.continuarRompidaDeHielo()
+    assert.that(manejadorDeHielo.hayHieloEn(game.at(1, 0)))
+    helado.iniciarRompidaDeHielo()
+    helado.continuarRompidaDeHielo()
+    assert.notThat(manejadorDeHielo.hayHieloEn(game.at(1, 0)))
+  }
+
 }
 
  describe "enemigos" {

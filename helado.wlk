@@ -55,15 +55,10 @@ method terminarEfecto() {
 
     method crearHielo() {
         const destino = self.posicionParaHielo()
-        if (self.habilitado(destino) && !self.hayHieloEn(destino)) {
+        if (self.habilitado(destino) && !manejadorDeHielo.hayHieloEn(destino)) {
             self.crearHieloEn(destino)
         }
     }
-
-    method hayHieloEn(destino) {
-        return manejadorDeHielo.hayHieloEn(destino)
-    }   
-    
 
     //cambiamos el hay pared por el de la cosa de los niveles 
     method hayParedEn(destino) = configuracion.nivelActual().hayParedEn(destino)
@@ -99,7 +94,7 @@ method terminarEfecto() {
 
     method habilitado (destino) = vivo && self.estaDentroDelTablero(destino)
 
-    method noHayBloques (destino) = !self.hayHieloEn(destino) && !self.hayParedEn(destino)
+    method noHayBloques (destino) = !manejadorDeHielo.hayHieloEn(destino) && !self.hayParedEn(destino)
 
     method continuarTiraDeHielo() {
         const destino = siguientePosicionHielo
@@ -128,7 +123,7 @@ method terminarEfecto() {
     method continuarRompidaDeHielo() {
         const destino = siguientePosicionHielo
 
-        if (self.habilitado(destino) && self.hayHieloEn(destino)) {
+        if (self.habilitado(destino) && manejadorDeHielo.hayHieloEn(destino)) {
             self.romperHieloEn(destino)
             siguientePosicionHielo = direccionDeLaTira.posicionSiguiente(destino)
             game.schedule(200, { self.continuarRompidaDeHielo() })
