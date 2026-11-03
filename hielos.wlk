@@ -4,17 +4,15 @@ import extras.*
 class Hielo inherits Ornamental {
     var property position
     var roto = false
+    var imagenActual = "placeholders/hielo.png"
 
-    method image() {
-        const frutaPuntual = configuracion.nivelActual().frutaEn(self.position())
+    method image() = imagenActual
 
-        if (configuracion.nivelActual().hayFrutaEn(self.position())) {
-            return frutaPuntual.imagenCongelada()
-        } else {
-            return "placeholders/hielo.png"
-        }
+    //si hay una fruta en su celda cambia su imagen a la congelada
+    method actualizarImagen() {
+        const fruta = configuracion.nivelActual().frutaEn(position)
+        imagenActual = if (fruta == null) "placeholders/hielo.png" else fruta.imagenCongelada()
     }
-
     // el hielo común se rompe con un solo golpe
     method recibirGolpe() {
         roto = true

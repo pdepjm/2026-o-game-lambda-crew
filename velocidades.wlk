@@ -3,7 +3,7 @@ object lento {
 }
 
 object normal {
-    method intervalo() = 225
+    method intervalo() = 250
 }
 
 object veloz {

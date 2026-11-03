@@ -79,11 +79,19 @@ class Nivel {
         frutasActivas.forEach({ fruta => fruta.movete() })
     }
 
+    //le pide al nivel que busque la fruta de esa celda y la actualice
+    method refrescarCongelamientoEn(posicion) {
+        const fruta = self.frutaEn(posicion)
+        if (fruta != null) {
+            fruta.actualizarCongelamiento()
+        }
+    }
     //Muestra solo las acitvas
     method mostrarFruta(fruta) {
         game.addVisual(fruta)
         frutasActivas.add(fruta)
         totalXFase += 1
+        manejadorDeHielo.refrescarEn(fruta.position())   // por si aparece sobre un hielo (fase 2)
     }
 
     //Como es por nivel, la implementacion depende del nivel, entonces va aca
@@ -238,14 +246,14 @@ object nivel1 inherits Nivel(
 
 object nivel2 inherits Nivel(
     initialGridMap = [
-        [k,_,_,_,_,_,_,_,_,_,k,_,_,_,_], //1 
+        [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_], //1 
         [_,p,p,i,i,i,i,i,i,i,i,i,p,p,_], //2
         [_,p,a,_,_,_,f,f,f,_,_,_,_,p,_], //3
         [_,i,_,_,_,_,f,f,f,_,_,_,_,i,_], //4
         [_,i,_,_,_,_,_,_,_,_,_,_,_,i,_],
         [k,i,_,_,_,p,p,p,p,p,k,l,_,i,_],
         [_,i,_,_,_,p,_,_,_,p,_,_,_,i,_], // 7
-        [k,i,_,_,_,_,_,h,_,_,k,_,_,i,_], //CENTRO 
+        [_,i,_,_,_,_,_,h,_,_,_,_,_,i,_], //CENTRO 
         [_,i,_,_,_,p,_,_,_,p,a,_,_,i,_], //7
         [_,i,_,_,_,p,p,p,p,p,_,_,_,i,_],
         [k,i,_,_,_,_,_,_,_,_,k,_,_,i,_],
@@ -320,7 +328,8 @@ object nivel4 inherits Nivel(
             new EnemigoRompeHielo(x=14, lix=0, lsx=14, y=0, liy=0, lsy=14),
             new EnemigoRompeHielo(x=10, lix=4, lsx=10, y=4, liy=4, lsy=10),
             new EnemigoRompeHielo(x=4, lix=4, lsx=10, y=10, liy=4, lsy=10),
-            new EnemigoPerseguidorRompeHielo(position = game.at(14, 14))
+            new EnemigoPerseguidorRompeHielo(position = game.at(14, 14)),
+            new EnemigoPerseguidorRompeHielo(position = game.at(0, 14))
         ]
 }
     
@@ -333,4 +342,5 @@ object finDelJuego {
   method totalFrutas() = 0
   method frutasComidas() = 0
   method moverFrutas() {}
+  method refrescarCongelamientoEn() {}
 }
