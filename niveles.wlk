@@ -326,10 +326,6 @@ object nivel4 inherits Nivel(
     
 }
 
-
-
-
-
 object finDelJuego {
   method iniciar() {}
   method hayParedEn(posicion) = false

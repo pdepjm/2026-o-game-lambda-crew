@@ -42,15 +42,18 @@ class EnemigoRompeHielo inherits EnemigoRectangular{
       sentido = sentido.opuesta()
     } else if (manejadorDeHielo.hayHieloEn(destino)) {
       estaRompiendoHielo = true
-      game.schedule(2000, {
-        if (manejadorDeHielo.hayHieloEn(destino)){
-          manejadorDeHielo.romperHieloEn(destino)
-        }
-        estaRompiendoHielo = false
-      })
+      self.romperHielo(destino)
+      estaRompiendoHielo = false
     } else {
       position = destino
     }
+  }
+
+  method romperHielo(destino) {
+    game.schedule(2000,{
+        if (manejadorDeHielo.hayHieloEn(destino)){
+          manejadorDeHielo.romperHieloEn(destino)}
+        })
   }
 }
 

@@ -10,7 +10,7 @@ import hielos.*
 object helado {
   var property position = game.origin()
   var property velocidad = normal
-  var enfriando = false
+  var efecto = false
   var imagen = "placeholders/helado.png"
   var vivo = true
   var direccionActual = derecha
@@ -23,16 +23,16 @@ object helado {
     method estaVivo() = vivo
   method movimiento() {}
 
-method terminarEnfriamiento() {
-  enfriando = false
+method terminarEfecto() {
+  efecto = false
 }
 
     method moverHacia(direccion) {
     direccionActual = direccion
-    if (!enfriando) {
+    if (!efecto) {
         direccion.mover(self)
-        enfriando = true
-        game.schedule(velocidad.intervalo(), { self.terminarEnfriamiento() })
+        efecto = true
+        game.schedule(velocidad.intervalo(), { self.terminarEfecto() })
     }
     }
 
@@ -85,7 +85,7 @@ method terminarEnfriamiento() {
         position = game.origin()
         vivo = true
         velocidad = normal
-        enfriando = false
+        efecto = false
         imagen = "placeholders/helado.png"
         manejadorDeHielo.reiniciar()                
         direccionActual = derecha 
