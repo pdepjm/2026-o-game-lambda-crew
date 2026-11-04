@@ -50,7 +50,7 @@ object configuracion {
     self.iniciar()
   }
     method volverAEmpezar() {
-    nivelActual = nivelActual.nivelAnterior()
+    nivelActual = nivelActual.nivelInicial()
     game.clear()
     helado.reiniciar()
     self.iniciar()
