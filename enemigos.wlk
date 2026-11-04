@@ -33,26 +33,28 @@ class EnemigoRompeHielo inherits EnemigoRectangular{
   }
 }
 
-  method imagenRompedora() = "placeholders/enemigoRompedorRompiendo.jpg"
-  method imagenNormal() = "placeholders/enemigoRompedor.jpg"
+  method imagenRompedora() = "placeholders/rompedorRompiendo.jpg"
+  method imagenNormal() = "placeholders/rompedor.png"
 
   override method moverA(destino) {
     if (configuracion.nivelActual().hayParedEn(destino)) {
       horario = !horario
       sentido = sentido.opuesta()
     } else if (manejadorDeHielo.hayHieloEn(destino)) {
-      estaRompiendoHielo = true
+
       self.romperHielo(destino)
-      estaRompiendoHielo = false
+
     } else {
       position = destino
     }
   }
 
   method romperHielo(destino) {
+    estaRompiendoHielo = true
     game.schedule(2000,{
         if (manejadorDeHielo.hayHieloEn(destino)){
           manejadorDeHielo.romperHieloEn(destino)}
+              estaRompiendoHielo = false
         })
   }
 }
