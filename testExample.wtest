@@ -112,6 +112,12 @@ describe "hielo"{
     assert.notThat(manejadorDeHielo.hayHieloEn(game.at(1, 0)))
   }
 
+  test "cuando un hielo pasa por encima de una fruta esta se sigue viendo a través de él" {
+    const fruta = new Frambuesa (position = game.at(1,1))
+    manejadorDeHielo.crearHieloEn(game.at(1, 1))
+    fruta.actualizarCongelamiento()
+    assert.equals("placeholders/frambuesaCongelada.png", fruta.image())
+  }
 }
 
  describe "enemigos" {
