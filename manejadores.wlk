@@ -26,10 +26,10 @@ object configuracion {
     tick.start()
     tick2.start()
     
-    keyboard.left().whilePressedDo({helado.moverHacia(izquierda)}, 25)
-    keyboard.right().whilePressedDo({helado.moverHacia(derecha)}, 25)
-    keyboard.up().whilePressedDo({helado.moverHacia(arriba)}, 25)
-    keyboard.down().whilePressedDo({helado.moverHacia(abajo)}, 25)
+    keyboard.left().whilePressedDo({helado.moverHacia(izquierda)}, 75)
+    keyboard.right().whilePressedDo({helado.moverHacia(derecha)}, 75)
+    keyboard.up().whilePressedDo({helado.moverHacia(arriba)}, 75)
+    keyboard.down().whilePressedDo({helado.moverHacia(abajo)}, 75)
     keyboard.space().onPressDo({ manejadorDeHielo.accionar() })
 
     game.onCollideDo(helado, {elemento => elemento.recibirChoqueDe(helado)})
@@ -39,11 +39,18 @@ object configuracion {
     //dsp vemos como hacer para que se genere al comer todas las frutas
       // creo que con meter pasar de nivel al creador de las frutas funca 
     keyboard.n().onPressDo({ self.pasarDeNivel() })
+    keyboard.v().onPressDo({ self.volverAEmpezar() })
   }
 
 
   method pasarDeNivel() {
     nivelActual = nivelActual.siguienteNivel()
+    game.clear()
+    helado.reiniciar()
+    self.iniciar()
+  }
+    method volverAEmpezar() {
+    nivelActual = nivelActual.nivelAnterior()
     game.clear()
     helado.reiniciar()
     self.iniciar()
