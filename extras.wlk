@@ -23,7 +23,7 @@ object puntaje inherits Ornamental{
 
 //Ahora esto solo es el cartel, no calcula nada 
 object cantFrut inherits Ornamental {
-  method position() = game.at(0,14)
+  method position() = game.at(3, 14)
   method text() = "Frutas Comidas: " + configuracion.nivelActual().frutasComidas() + "/" + configuracion.nivelActual().totalFrutas()
 }
 
@@ -33,3 +33,31 @@ class Pared inherits Ornamental {
   method image() = "placeholders/pared.jpg"
   
 }
+
+class IndicadorFruta inherits Ornamental {
+    const property tipo
+    const imagenGris
+    const imagenColor
+    var property position = game.origin()
+
+    method image() =
+        if (configuracion.nivelActual().completoTipo(tipo)) imagenColor else imagenGris
+}
+
+const indicadorFrambuesa = new IndicadorFruta(
+    tipo = "frambuesa",
+    imagenGris = "placeholders/frambuesaGris.png",
+    imagenColor = "placeholders/frambuesaIndicador.png"
+)
+
+const indicadorUva = new IndicadorFruta(
+    tipo = "uva",
+    imagenGris = "placeholders/uvaGris.png",
+    imagenColor = "placeholders/uvaIndicador.png"
+)
+
+const indicadorKiwi = new IndicadorFruta(
+    tipo = "kiwi",
+    imagenGris = "placeholders/kiwiGris.png",
+    imagenColor = "placeholders/kiwiIndicador.png"
+)

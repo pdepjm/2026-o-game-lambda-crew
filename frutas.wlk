@@ -5,10 +5,9 @@ import extras.*
 
 
 class Fruta {
-  //Para saber que foto poner, si la congelada o la normal
   var congelada = false
+  var comida = false          // NUEVO
 
-  //Sistema de congelamiento para q evitemos el lag q hacia la otra forma 
   method image() = if (congelada) self.imagenCongelada() else self.imagenNormal()
 
   method actualizarCongelamiento() {
@@ -17,20 +16,21 @@ class Fruta {
 
   method imagenNormal()
   method imagenCongelada()
+  method tipo()               // NUEVO: lo define cada subclase
+  method comida() = comida    // NUEVO
 
-  var property position 
+  var property position
 
-  method puntosOtorgados () 
-  method movete() {} 
-    //Por defecto no se mueven, cuando hago el kiwi lo sobreescribo
+  method puntosOtorgados()
+  method movete() {}
 
   method recibirChoqueDe(unHelado){
+    comida = true             // NUEVO
     game.removeVisual(self)
     puntaje.sumarPuntos(self.puntosOtorgados())
-    configuracion.nivelActual().frutaComida(self) 
+    configuracion.nivelActual().frutaComida(self)
   }
 }
-
 class FrutaRectangular inherits MovimientoRectangular {
   
   method puntosOtorgados () 
@@ -45,12 +45,14 @@ class FrutaRectangular inherits MovimientoRectangular {
 }
 
 class Frambuesa inherits Fruta {
+  override method tipo() = "frambuesa"
   override method imagenNormal() = "placeholders/frambuesa.jpg"
   override method imagenCongelada() = "placeholders/frambuesaCongelada.png"
   override method puntosOtorgados() = 100
 }
 
 class Uva inherits Fruta {
+  override method tipo() = "uva"
   override method imagenNormal() = "placeholders/uva.png"
   override method imagenCongelada() = "placeholders/uvaCongelada.png"
   override method puntosOtorgados() = 200
@@ -58,7 +60,7 @@ class Uva inherits Fruta {
 
 class Kiwi inherits Fruta {
   const movimiento    
-
+  override method tipo() = "kiwi"
   override method imagenNormal() = "placeholders/kiwi.jpg"
   override method imagenCongelada() = "placeholders/kiwiCongelado.png"
   override method puntosOtorgados() = 300

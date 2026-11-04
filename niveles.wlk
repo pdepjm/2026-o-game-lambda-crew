@@ -20,6 +20,7 @@ class Nivel {
     //Para generar una y dsp la otra generamos todo junto pero solo mostramos las activas
     const frutasActivas = []    // las que están visibles ahora
     const frutasEnEspera = []   // las que van a aparecer al comer todas las otras
+    const todasLasFrutas = []
     var totalXFase = 0
 
     //Logica similar al reiniciar 
@@ -28,6 +29,7 @@ class Nivel {
         paredes.clear() //de momento solo pares, si queremos borrar todo, abstraemos (self.clearpositions())
         frutasActivas.clear()
         frutasEnEspera.clear()
+        todasLasFrutas.clear()
         totalXFase = 0    
         self.dibujarMapa() // Si queremos poner menu lo tenemos que poner aca abajo
         manejadorDeEnemigos.cargarEnemigos(self.crearEnemigos())
@@ -60,20 +62,24 @@ class Nivel {
     //aca ponemos todo lo q refiera a la generacion de frutas x nivel 
     //con fase queremos decir FASE 1 frambuesas y FASE 2 uvas por ej 
 
-    method agregarFrambuesa(x, y) { 
-        self.mostrarFruta(new Frambuesa(position = game.at(x, y))) 
-        }
-    method agregarUva(x, y){
-         frutasEnEspera.add(new Uva(position = game.at(x, y))) 
-    }
-    method agregarKiwi(x, y) {
-        const recorrido = new MovimientoRectangular(
-            x = x, y = y,
-            lix = x, lsx = x + 4,
-            lsy = y, liy = y - 4
-        )
-        self.mostrarFruta(new Kiwi(position = game.at(x, y), movimiento = recorrido))
-    }
+method agregarFrambuesa(x, y) {
+    const fruta = new Frambuesa(position = game.at(x, y))
+    todasLasFrutas.add(fruta)
+    self.mostrarFruta(fruta)
+}
+
+method agregarUva(x, y) {
+    const fruta = new Uva(position = game.at(x, y))
+    todasLasFrutas.add(fruta)
+    frutasEnEspera.add(fruta)
+}
+
+method agregarKiwi(x, y) {
+    const recorrido = new MovimientoRectangular(x = x, y = y, lix = x, lsx = x + 4, lsy = y, liy = y - 4)
+        const fruta = new Kiwi(position = game.at(x, y), movimiento = recorrido)
+        todasLasFrutas.add(fruta)
+       self.mostrarFruta(fruta)
+ }
 
     //El nivel le dice a las frutas que se muevan
     method moverFrutas() {
@@ -98,6 +104,27 @@ class Nivel {
     //Como es por nivel, la implementacion depende del nivel, entonces va aca
     method totalFrutas() = totalXFase
     method frutasComidas() = totalXFase - frutasActivas.size()
+
+    method hayFrutasDeTipo(tipo) =
+    todasLasFrutas.any({ fruta => fruta.tipo() == tipo })
+
+method completoTipo(tipo) =
+    todasLasFrutas
+        .filter({ fruta => fruta.tipo() == tipo })
+        .all({ fruta => fruta.comida() })
+
+method mostrarIndicadores() {
+    const presentes = [indicadorFrambuesa, indicadorUva, indicadorKiwi]
+        .filter({ indicador => self.hayFrutasDeTipo(indicador.tipo()) })
+
+    var x = 0
+
+    presentes.forEach({ indicador =>
+        indicador.position(game.at(x, 14))
+        game.addVisual(indicador)
+        x += 1
+    })
+}
 
     //Esto no se si va aca pero de momento creo que no hay otra forma 
     //de avanzar la fase
@@ -349,4 +376,5 @@ object finDelJuego {
   method frutasComidas() = 0
   method moverFrutas() {}
   method refrescarCongelamientoEn() {}
+  method completoTipo(tipo) = false
 }

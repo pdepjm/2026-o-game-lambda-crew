@@ -19,8 +19,7 @@ object configuracion {
 
     game.addVisual(helado)
     //game.addVisual(p) --> Lo sacamos pq ahora lo hace nivel 
-    game.addVisual(puntaje)
-    game.addVisual(cantFrut)
+    nivelActual.mostrarIndicadores()
 
 
     tick.start()
