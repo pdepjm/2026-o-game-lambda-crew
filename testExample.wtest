@@ -174,6 +174,39 @@ describe "fases de frutas" {
   }
 }
 
+describe "cartel de game over" {
+
+  method initialize() {
+    game.clear()
+    game.width(15)
+    game.height(15)
+    helado.reiniciar()
+  }
+
+  test "mientras el helado está vivo no hay cartel" {
+    assert.equals(0, game.getObjectsIn(textoGameOver.position()).size())
+    assert.equals(0, game.getObjectsIn(textoReintentar.position()).size())
+  }
+
+  test "cuando el helado muere se muestra el texto de game over" {
+    helado.morir()
+    assert.that(game.getObjectsIn(textoGameOver.position()).contains(textoGameOver))
+  }
+
+  test "cuando el helado muere se muestra el texto de reintentar" {
+    helado.morir()
+    assert.that(game.getObjectsIn(textoReintentar.position()).contains(textoReintentar))
+  }
+
+  //si una vez muerto le pasa otro enemigo por arriba
+  test "si el helado muere dos veces los textos se muestras una sola vez" {
+    helado.morir()
+    helado.morir()
+    assert.equals(1, game.getObjectsIn(textoGameOver.position()).size())
+    assert.equals(1, game.getObjectsIn(textoReintentar.position()).size())
+  }
+}
+
 describe "fin del juego" {
 
   method initialize() {

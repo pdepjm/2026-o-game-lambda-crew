@@ -48,7 +48,7 @@ class Nivel {
         initialGridMap.forEach({fila => var x = 0 fila.forEach({celda => celda.decode(x, y, self) x += 1 }) y -= 1 })
     }
 
-    //Como las paredes las paredes se crean por nivel lo ponemos aca 
+    //Como las paredes se crean por nivel lo ponemos aca 
     //quizas dsp hay que pasarlo a un generador de paredes o algo asi 
 
     method agregarPared(x, y) {
@@ -126,15 +126,15 @@ method mostrarIndicadores() {
     })
 }
 
-    //Esto no se si va aca pero de momento creo que no hay otra forma 
-    //de avanzar la fase
+ 
     method frutaComida(fruta) {
         frutasActivas.remove(fruta)
         if (frutasActivas.isEmpty()) {
             self.avanzarFase()
         }
     }
-
+    //Esto no se si va aca pero de momento creo que no hay otra forma 
+    //de avanzar la fase
     method avanzarFase() {
         if (frutasEnEspera.isEmpty()) {
             game.schedule(100, { configuracion.pasarDeNivel() })  // no quedan fases: siguiente nivel
@@ -379,6 +379,6 @@ object finDelJuego {
   method totalFrutas() = 0
   method frutasComidas() = 0
   method moverFrutas() {}
-  method refrescarCongelamientoEn() {}
+  method refrescarCongelamientoEn(posicion) {}
   method completoTipo(tipo) = false
 }
