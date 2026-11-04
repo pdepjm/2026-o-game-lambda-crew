@@ -12,6 +12,7 @@ class Nivel {
     const initialGridMap
 
     const property siguienteNivel
+    const property nivelInicial
 
     const paredes = []
     var posicionInicialHelado = game.origin()
@@ -231,8 +232,9 @@ object nivel1 inherits Nivel(
         [_,f,_,_,_,_,_,i,_,_,_,_,_,f,_], //3
         [_,f,f,f,_,_,_,i,_,_,_,f,f,f,_], //2
         [h,u,u,u,_,_,_,i,_,_,_,u,u,u,_]  //1
-    ], 
-    siguienteNivel = nivel2
+    ],
+    siguienteNivel = nivel2,
+    nivelInicial = self
 ){
     override method crearEnemigos() {
         return [
@@ -262,7 +264,8 @@ object nivel2 inherits Nivel(
         [_,p,p,i,i,i,i,i,i,i,i,i,p,p,_], //2
         [_,_,_,_,_,_,_,_,_,_,_,_,_,_,_]  //1
     ], 
-    siguienteNivel = nivel3
+    siguienteNivel = nivel3,
+    nivelInicial = nivel1
 ){
     override method crearEnemigos() {
         return [
@@ -290,7 +293,8 @@ object nivel3 inherits Nivel(
         [_,f,f,f,_,_,_,_,_,_,_,f,f,f,_], //2
         [h,u,u,u,_,_,_,_,_,_,_,u,u,u,_]  //1
     ], 
-    siguienteNivel = nivel4
+    siguienteNivel = nivel4,
+    nivelInicial = nivel1
 ){
     override method crearEnemigos() {
         return [
@@ -320,7 +324,8 @@ object nivel4 inherits Nivel(
         [u,p,f,p,_,_,_,_,_,_,_,p,f,p,u], //2
         [u,u,_,_,_,_,_,l,_,_,_,_,a,u,u]  //1
     ], 
-    siguienteNivel = finDelJuego
+    siguienteNivel = finDelJuego,
+    nivelInicial = nivel1
 ){
     override method crearEnemigos() {
         return [
@@ -339,6 +344,7 @@ object finDelJuego {
   method iniciar() {}
   method hayParedEn(posicion) = false
   method siguienteNivel() = self
+  method nivelInicial() = nivel1
   method totalFrutas() = 0
   method frutasComidas() = 0
   method moverFrutas() {}

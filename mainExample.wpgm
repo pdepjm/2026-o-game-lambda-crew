@@ -19,7 +19,7 @@ program juego {
 	game.boardGround("placeholders/suelo.jpg")
 	
 
-	// musica = game.sound("placeholders/musicaBdIc.mp3")
+	// const musica = game.sound("placeholders/musicaBdIc.mp3")
 	//musica.shouldLoop(true)
 	//game.schedule(500, { musica.play()} )
 
