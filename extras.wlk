@@ -33,3 +33,9 @@ class Pared inherits Ornamental {
   method image() = "placeholders/pared.jpg"
   
 }
+
+object cartelVictoria inherits Ornamental {
+  method position() = game.at(3, 7)
+  method text() = "¡GANASTE! Puntos: " + puntaje.puntos()
+  method textColor() = "00FF00FF"
+}

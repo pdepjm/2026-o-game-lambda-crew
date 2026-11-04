@@ -341,12 +341,19 @@ object nivel4 inherits Nivel(
 }
 
 object finDelJuego {
-  method iniciar() {}
+  method iniciar() {
+    manejadorDeEnemigos.cargarEnemigos([])
+    helado.detener()
+    game.addVisual(cartelVictoria)
+  }
   method hayParedEn(posicion) = false
   method siguienteNivel() = self
   method nivelInicial() = nivel1
   method totalFrutas() = 0
   method frutasComidas() = 0
   method moverFrutas() {}
-  method refrescarCongelamientoEn() {}
+  method refrescarCongelamientoEn(posicion) {}
+  method frutaEn(posicion) = null
+  method hayFrutaEn(posicion) = false
+  method frutaComida(fruta) {}
 }
