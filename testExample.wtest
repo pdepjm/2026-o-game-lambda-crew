@@ -90,11 +90,10 @@ describe "hielo"{
 
   test "romper hielo elimina el hielo de adelante" {
     helado.crearHielo()
-    helado.iniciarRompidaDeHielo()
-    helado.continuarRompidaDeHielo()
+    helado.romperHielo()
     assert.notThat(manejadorDeHielo.hayHieloEn(game.at(1, 0)))
     assert.equals(0, game.getObjectsIn(game.at(1, 0)).size())
-  } 
+  }
   
   test "el helado no puede atravesar un hielo" {
     manejadorDeHielo.crearHieloEn(game.at(1, 0))
@@ -102,13 +101,11 @@ describe "hielo"{
     assert.equals(game.at(0, 0), helado.position())
   }
 
-  test "el hielo resistente NO se rompe a la primera, más SI a la segunda" {
+    test "el hielo resistente NO se rompe a la primera, más SI a la segunda" {
     manejadorDeHielo.crearHieloResistenteEn(game.at(1, 0))
-    helado.iniciarRompidaDeHielo()
-    helado.continuarRompidaDeHielo()
+    helado.romperHielo()
     assert.that(manejadorDeHielo.hayHieloEn(game.at(1, 0)))
-    helado.iniciarRompidaDeHielo()
-    helado.continuarRompidaDeHielo()
+    helado.romperHielo()
     assert.notThat(manejadorDeHielo.hayHieloEn(game.at(1, 0)))
   }
 
@@ -177,3 +174,23 @@ describe "fases de frutas" {
   }
 }
 
+describe "fin del juego" {
+
+  method initialize() {
+    game.clear()
+    game.width(15)
+    game.height(15)
+    helado.reiniciar()
+  }
+
+  test "el fin del juego entiende los mensajes que el resto del juego le manda a un nivel" {
+    finDelJuego.refrescarCongelamientoEn(game.at(1, 1))
+    assert.notThat(finDelJuego.hayParedEn(game.at(1, 1)))
+  }
+
+  test "al llegar al fin del juego el helado queda quieto" {
+    finDelJuego.iniciar()
+    helado.moverHacia(derecha)
+    assert.equals(game.at(0, 0), helado.position())
+  }
+}

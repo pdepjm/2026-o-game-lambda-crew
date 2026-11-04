@@ -33,7 +33,6 @@ class Pared inherits Ornamental {
   method image() = "placeholders/pared.jpg"
   
 }
-
 class IndicadorFruta inherits Ornamental {
     const property tipo
     const imagenGris
@@ -61,3 +60,8 @@ const indicadorKiwi = new IndicadorFruta(
     imagenGris = "placeholders/kiwiGris.png",
     imagenColor = "placeholders/kiwiIndicador.png"
 )
+object cartelVictoria inherits Ornamental {
+  method position() = game.at(3, 7)
+  method text() = "¡GANASTE! Puntos: " + puntaje.puntos()
+  method textColor() = "00FF00FF"
+}

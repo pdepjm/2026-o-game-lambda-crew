@@ -14,8 +14,6 @@ object helado {
   var imagen = "placeholders/helado.png"
   var vivo = true
   var direccionActual = derecha
-  var siguientePosicionHielo = game.origin()
-  var direccionDeLaTira = derecha
   var efectosAplicados = 0
 
 
@@ -70,7 +68,11 @@ method terminarEfecto() {
         cartelReintentar.mostrar()
     }
     }
-
+     // pantalla final: el helado queda quieto
+    method detener() {
+        vivo = false
+    }
+    
 // vuelve al principio
     method reiniciar() {
         position = game.origin()
@@ -87,25 +89,31 @@ method terminarEfecto() {
         return direccionActual.posicionSiguiente(position)   // ve cual es la ultima direccion en la que se mov 
     }                                                    // y le suma uno, la funcion esta en direcciones. 
 
-    method iniciarTiraDeHielo() {
-        direccionDeLaTira = direccionActual
-        siguientePosicionHielo = self.posicionParaHielo()
+    method tirarHielo() {
+        self.continuarTiraDeHielo(self.posicionParaHielo(), direccionActual)
+    }
+
+    method continuarTiraDeHielo(destino, direccion) {
+        if (self.habilitado(destino) && self.noHayBloques(destino) && !manejadorDeEnemigos.hayEnemigoEn(destino)) {
+            self.crearHieloEn(destino)
+            game.schedule(200, { self.continuarTiraDeHielo(direccion.posicionSiguiente(destino), direccion) })
+        }
+    }
+
+    method romperHielo() {
+        self.continuarRompidaDeHielo(self.posicionParaHielo(), direccionActual)
+    }
+
+    method continuarRompidaDeHielo(destino, direccion) {
+        if (self.habilitado(destino) && manejadorDeHielo.hayHieloEn(destino)) {
+            self.romperHieloEn(destino)
+            game.schedule(200, { self.continuarRompidaDeHielo(direccion.posicionSiguiente(destino), direccion) })
+        }
     }
 
     method habilitado (destino) = vivo && self.estaDentroDelTablero(destino)
 
     method noHayBloques (destino) = !manejadorDeHielo.hayHieloEn(destino) && !self.hayParedEn(destino)
-
-    method continuarTiraDeHielo() {
-        const destino = siguientePosicionHielo
-
-        if (self.habilitado(destino) && self.noHayBloques(destino) && !manejadorDeEnemigos.hayEnemigoEn(destino)) {
-            self.crearHieloEn(destino)
-            siguientePosicionHielo =
-            direccionDeLaTira.posicionSiguiente(destino)
-            game.schedule(200, { self.continuarTiraDeHielo() })
-        }
-    }
 
     method hieloEn(unaPosicion) {
         return manejadorDeHielo.hieloEn(unaPosicion)
@@ -113,21 +121,6 @@ method terminarEfecto() {
 
     method romperHieloEn(destino) {
         manejadorDeHielo.romperHieloEn(destino)
-    }
-
-    method iniciarRompidaDeHielo() { 
-        direccionDeLaTira = direccionActual
-        siguientePosicionHielo = self.posicionParaHielo()
-    }
-
-    method continuarRompidaDeHielo() {
-        const destino = siguientePosicionHielo
-
-        if (self.habilitado(destino) && manejadorDeHielo.hayHieloEn(destino)) {
-            self.romperHieloEn(destino)
-            siguientePosicionHielo = direccionDeLaTira.posicionSiguiente(destino)
-            game.schedule(200, { self.continuarRompidaDeHielo() })
-        }
     }
 
     method cambiarVelocidadTemporalmente(unaVelocidad, duracion) {

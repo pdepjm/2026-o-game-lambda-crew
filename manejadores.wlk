@@ -9,13 +9,21 @@ import hielos.*
 
 object configuracion {
   var nivelActual = nivel1
+  var generacion = 0
   method nivelActual() = nivelActual
 
+  // como game.schedule, pero no hace nada si mientras tanto se reinició o cambió el nivel
+  method programar(tiempo, accion) {
+    const generacionActual = generacion
+    game.schedule(tiempo, {
+      if (generacion == generacionActual) accion.apply()
+    })
+  }
   method iniciar() {
     nivelActual.iniciar()       // dibuja el mapa y posiciona al helado
     const tick = game.tick(666, { manejadorDeEnemigos.moverEnemigos() }, false)
     const tick2 = game.tick(500, { self.nivelActual().moverFrutas() }, false)
-
+    generacion += 1
 
     game.addVisual(helado)
     //game.addVisual(p) --> Lo sacamos pq ahora lo hace nivel 
@@ -102,13 +110,11 @@ object cartelReintentar {
 object manejadorDeHielo {
   const hielos = []
 
-  method accionar() {
+   method accionar() {
     if (self.hayHieloEn(helado.posicionParaHielo())) {
-      helado.iniciarRompidaDeHielo()
-      helado.continuarRompidaDeHielo()
+      helado.romperHielo()
     } else {
-      helado.iniciarTiraDeHielo()
-      helado.continuarTiraDeHielo()
+      helado.tirarHielo()
     }
   }
 
