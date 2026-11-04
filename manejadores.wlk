@@ -68,18 +68,25 @@ object manejadorDeEnemigos {
     }
 
 }
-object cartelReintentar inherits Ornamental {
-  method position() = game.at(3, 7)
-  method text() = "GAME OVER - Apretá R para reintentar"
-  method textColor() = "FF0000FF"   // rojo
+object textoGameOver {
+  method position() = game.at(4, 7)
+  method image() = "placeholders/gameOver.png"
+}
 
+object textoReintentar {
+  method position() = game.at(4, 6)
+  method image() = "placeholders/reintentar.png"
+}
+
+object cartelReintentar {
   method mostrar() {
-    game.addVisual(self)
+    game.addVisual(textoGameOver)
+    game.addVisual(textoReintentar)
     keyboard.r().onPressDo({ self.reintentar() })
   }
 
   method reintentar() {
-    game.clear()          // saca todos los visuals, teclas, ticks y colisiones
+    game.clear()
     helado.reiniciar()
     puntaje.reiniciar()
     configuracion.iniciar()
