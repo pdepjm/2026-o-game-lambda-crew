@@ -6,7 +6,7 @@ import extras.*
 
 class Fruta {
   var congelada = false
-  var comida = false          // NUEVO
+  var comida = false       
 
   method image() = if (congelada) self.imagenCongelada() else self.imagenNormal()
 
@@ -16,8 +16,8 @@ class Fruta {
 
   method imagenNormal()
   method imagenCongelada()
-  method tipo()               // NUEVO: lo define cada subclase
-  method comida() = comida    // NUEVO
+  method tipo()              
+  method comida() = comida    
 
   var property position
 
@@ -25,7 +25,7 @@ class Fruta {
   method movete() {}
 
   method recibirChoqueDe(unHelado){
-    comida = true             // NUEVO
+    comida = true            
     game.removeVisual(self)
     puntaje.sumarPuntos(self.puntosOtorgados())
     configuracion.nivelActual().frutaComida(self)
