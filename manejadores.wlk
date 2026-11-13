@@ -64,6 +64,25 @@ object configuracion {
   }
 }
 
+
+//====== MENUUUU =======
+object imagenMenu {
+  method position() = game.origin()
+  method image() = "placeholders/menu.png"
+}
+
+object menuInicio {
+  method mostrar() {
+    game.addVisual(imagenMenu)
+    keyboard.enter().onPressDo({ self.empezar() })
+  }
+
+  method empezar() {
+    game.clear()                 
+    configuracion.iniciar()     
+  }
+}
+
 object manejadorDeEnemigos {
     const listaDeEnemigos = []
     

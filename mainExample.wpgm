@@ -23,7 +23,7 @@ program juego {
 	//musica.shouldLoop(true)
 	//game.schedule(500, { musica.play()} )
 
-	configuracion.iniciar()
+	menuInicio.mostrar()
 	
 	game.start()
 }
