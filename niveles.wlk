@@ -137,7 +137,7 @@ method mostrarIndicadores() {
     //de avanzar la fase
     method avanzarFase() {
         if (frutasEnEspera.isEmpty()) {
-            game.schedule(100, { configuracion.pasarDeNivel() })  // no quedan fases: siguiente nivel
+            game.schedule(100, { configuracion.nivelCompletado() })  // no quedan fases: siguiente nivel (ahora le puse que vaya al menu)
         } else {
             totalXFase = 0
             frutasEnEspera.forEach({ fruta => self.mostrarFruta(fruta) })
@@ -244,7 +244,7 @@ object l { //relentizador
 
 object nivel1 inherits Nivel(
     initialGridMap = [
-        [_,u,u,u,_,_,_,i,_,_,_,u,u,u,_], //1 
+        [_,_,u,u,_,_,_,i,_,_,_,u,u,_,_], //1 
         [_,f,f,f,_,_,_,i,_,_,_,f,f,f,_], //2
         [_,f,_,_,a,_,_,i,_,_,l,_,_,f,_], //3
         [_,f,_,_,_,_,_,i,_,_,_,_,_,f,_], //4
@@ -258,7 +258,7 @@ object nivel1 inherits Nivel(
         [_,f,_,_,l,_,_,i,_,_,a,_,_,f,_], //4
         [_,f,_,_,_,_,_,i,_,_,_,_,_,f,_], //3
         [_,f,f,f,_,_,_,i,_,_,_,f,f,f,_], //2
-        [h,u,u,u,_,_,_,i,_,_,_,u,u,u,_]  //1
+        [h,_,u,u,_,_,_,i,_,_,_,u,u,_,_]  //1
     ],
     siguienteNivel = nivel2,
     nivelInicial = self

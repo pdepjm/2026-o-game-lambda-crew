@@ -49,6 +49,11 @@ object configuracion {
     keyboard.v().onPressDo({ self.volverAEmpezar() })
   }
 
+  method nivelCompletado() {
+    helado.detener()              
+    pantallaContinuar.mostrar()
+  }
+
 
   method pasarDeNivel() {
     nivelActual = nivelActual.siguienteNivel()
@@ -80,6 +85,20 @@ object menuInicio {
   method empezar() {
     game.clear()                 
     configuracion.iniciar()     
+  }
+}
+
+//======== Menu para pasar nivel ====== 
+object imagenContinuar {
+  method position() = game.origin()
+  method image() = "placeholders/continuar.png"
+}
+
+object pantallaContinuar {
+  method mostrar() {
+    game.addVisual(imagenContinuar)
+    game.addVisual(puntaje)      // Puse para que muestre los puntos como antes, si quieren lo sacamos
+    keyboard.enter().onPressDo({ configuracion.pasarDeNivel() })
   }
 }
 
