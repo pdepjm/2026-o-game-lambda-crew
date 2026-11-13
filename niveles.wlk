@@ -304,7 +304,7 @@ object nivel2 inherits Nivel(
 
 object nivel3 inherits Nivel(
     initialGridMap = [
-        [_,u,u,u,_,_,_,_,_,_,_,u,u,u,_], //1 
+        [_,_,u,u,_,_,_,_,_,_,_,u,u,_,_], //1 
         [_,f,f,f,_,_,_,_,_,_,_,f,f,f,_], //2
         [_,f,_,_,_,_,_,_,_,_,_,_,p,f,_], //3
         [_,f,_,_,_,_,_,_,_,_,_,_,p,f,_], //4
@@ -318,7 +318,7 @@ object nivel3 inherits Nivel(
         [_,f,p,_,_,_,_,_,_,_,_,_,_,f,_], //4
         [_,f,p,_,_,_,a,_,_,_,_,_,_,f,_], //3
         [_,f,f,f,_,_,_,_,_,_,_,f,f,f,_], //2
-        [h,u,u,u,_,_,_,_,_,_,_,u,u,u,_]  //1
+        [h,_,u,u,_,_,_,_,_,_,_,u,u,_,_]  //1
     ], 
     siguienteNivel = nivel4,
     nivelInicial = nivel1
@@ -335,8 +335,8 @@ object nivel3 inherits Nivel(
 
 object nivel4 inherits Nivel(
     initialGridMap = [
-        [u,u,a,_,_,_,_,l,_,_,_,_,_,u,u], //1 
-        [u,p,f,p,_,_,_,_,_,_,_,p,f,p,u], //2
+        [_,_,a,_,_,_,_,l,_,_,_,_,_,u,u], //1 
+        [_,p,f,p,_,_,_,_,_,_,_,p,f,p,u], //2
         [_,i,f,i,_,_,_,_,_,_,_,i,f,i,_], //3
         [_,p,f,p,_,_,_,l,_,_,_,p,f,p,_], //4
         [_,i,f,i,_,_,_,_,_,_,_,i,f,i,_],
@@ -348,8 +348,8 @@ object nivel4 inherits Nivel(
         [_,i,f,i,_,_,_,_,_,_,_,i,f,i,_],
         [_,p,f,p,_,_,_,l,_,_,_,p,f,p,_], //4
         [_,i,f,i,_,_,_,h,_,_,_,i,f,i,_], //3
-        [u,p,f,p,_,_,_,_,_,_,_,p,f,p,u], //2
-        [u,u,_,_,_,_,_,l,_,_,_,_,a,u,u]  //1
+        [u,p,f,p,_,_,_,_,_,_,_,p,f,p,_], //2
+        [u,u,_,_,_,_,_,l,_,_,_,_,a,_,_]  //1
     ], 
     siguienteNivel = finDelJuego,
     nivelInicial = nivel1
