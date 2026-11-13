@@ -390,6 +390,7 @@ object finDelJuego {
   method totalFrutas() = 0
   method frutasComidas() = 0
   method moverFrutas() {}
+  method mostrarIndicadores() {}
   method refrescarCongelamientoEn(posicion) {}
   method completoTipo(tipo) = false
 }
