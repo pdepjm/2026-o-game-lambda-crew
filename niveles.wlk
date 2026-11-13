@@ -129,12 +129,16 @@ method mostrarIndicadores() {
  
     method frutaComida(fruta) {
         frutasActivas.remove(fruta)
+        self.actualizarIndicadores()
         if (frutasActivas.isEmpty()) {
             self.avanzarFase()
         }
     }
-    //Esto no se si va aca pero de momento creo que no hay otra forma 
-    //de avanzar la fase
+    method actualizarIndicadores() {
+        [indicadorFrambuesa, indicadorUva, indicadorKiwi].forEach({ indicador => indicador.actualizar() })
+    }
+
+
     method avanzarFase() {
         if (frutasEnEspera.isEmpty()) {
             game.schedule(100, { configuracion.nivelCompletado() })  // no quedan fases: siguiente nivel (ahora le puse que vaya al menu)

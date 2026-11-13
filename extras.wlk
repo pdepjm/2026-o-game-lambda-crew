@@ -38,9 +38,13 @@ class IndicadorFruta inherits Ornamental {
     const imagenGris
     const imagenColor
     var property position = game.origin()
+    var completo = false
 
-    method image() =
-        if (configuracion.nivelActual().completoTipo(tipo)) imagenColor else imagenGris
+    method image() =if (completo) imagenColor else imagenGris
+
+    method actualizar() {
+      completo = configuracion.nivelActual().completoTipo(tipo)
+    }
 }
 
 const indicadorFrambuesa = new IndicadorFruta(
