@@ -65,7 +65,6 @@ const indicadorKiwi = new IndicadorFruta(
     imagenColor = "placeholders/kiwiIndicador.png"
 )
 object cartelVictoria inherits Ornamental {
-  method position() = game.at(3, 7)
-  method text() = "¡GANASTE! Puntos: " + puntaje.puntos()
-  method textColor() = "00FF00FF"
+  method position() = game.origin()
+  method image () = "placeholders/victoria.png"
 }

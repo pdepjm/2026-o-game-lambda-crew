@@ -62,24 +62,24 @@ class Nivel {
     //aca ponemos todo lo q refiera a la generacion de frutas x nivel 
     //con fase queremos decir FASE 1 frambuesas y FASE 2 uvas por ej 
 
-method agregarFrambuesa(x, y) {
-    const fruta = new Frambuesa(position = game.at(x, y))
-    todasLasFrutas.add(fruta)
-    self.mostrarFruta(fruta)
-}
-
-method agregarUva(x, y) {
-    const fruta = new Uva(position = game.at(x, y))
-    todasLasFrutas.add(fruta)
-    frutasEnEspera.add(fruta)
-}
-
-method agregarKiwi(x, y) {
-    const recorrido = new MovimientoRectangular(x = x, y = y, lix = x, lsx = x + 4, lsy = y, liy = y - 4)
-        const fruta = new Kiwi(position = game.at(x, y), movimiento = recorrido)
+    method agregarFrambuesa(x, y) {
+        const fruta = new Frambuesa(position = game.at(x, y))
         todasLasFrutas.add(fruta)
-       self.mostrarFruta(fruta)
- }
+        self.mostrarFruta(fruta)
+    }
+
+    method agregarUva(x, y) {
+        const fruta = new Uva(position = game.at(x, y))
+        todasLasFrutas.add(fruta)
+        frutasEnEspera.add(fruta)
+    }
+
+    method agregarKiwi(x, y) {
+        const recorrido = new MovimientoRectangular(x = x, y = y, lix = x, lsx = x + 4, lsy = y, liy = y - 4)
+            const fruta = new Kiwi(position = game.at(x, y), movimiento = recorrido)
+            todasLasFrutas.add(fruta)
+        self.mostrarFruta(fruta)
+    }
 
     //El nivel le dice a las frutas que se muevan
     method moverFrutas() {
@@ -108,23 +108,23 @@ method agregarKiwi(x, y) {
     method hayFrutasDeTipo(tipo) =
     todasLasFrutas.any({ fruta => fruta.tipo() == tipo })
 
-method completoTipo(tipo) =
-    todasLasFrutas
-        .filter({ fruta => fruta.tipo() == tipo })
-        .all({ fruta => fruta.comida() })
+    method completoTipo(tipo) =
+        todasLasFrutas
+            .filter({ fruta => fruta.tipo() == tipo })
+            .all({ fruta => fruta.comida() })
 
-method mostrarIndicadores() {
-    const presentes = [indicadorFrambuesa, indicadorUva, indicadorKiwi]
-        .filter({ indicador => self.hayFrutasDeTipo(indicador.tipo()) })
+    method mostrarIndicadores() {
+        const presentes = [indicadorFrambuesa, indicadorUva, indicadorKiwi]
+            .filter({ indicador => self.hayFrutasDeTipo(indicador.tipo()) })
 
-    var x = 0
+        var x = 0
 
-    presentes.forEach({ indicador =>
-        indicador.position(game.at(x, 14))
-        game.addVisual(indicador)
-        x += 1
-    })
-}
+        presentes.forEach({ indicador =>
+            indicador.position(game.at(x, 14))
+            game.addVisual(indicador)
+            x += 1
+        })
+    }
 
  
     method frutaComida(fruta) {
@@ -368,6 +368,13 @@ object nivel4 inherits Nivel(
             new EnemigoPerseguidorRompeHielo(position = game.at(0, 14))
         ]
 }
+    override method avanzarFase() {
+        if (frutasEnEspera.isEmpty()) {
+            game.schedule(100, { configuracion.pasarDeNivel() })  
+        } else {
+            super()
+        }
+    }
     
 }
 
