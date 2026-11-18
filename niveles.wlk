@@ -174,11 +174,11 @@ class Nivel {
     }
 
     method agregarAcelerador(x, y) {
-    game.addVisual(new ModificadorDeVelocidad(imagen = "placeholders/diesel.jpg", x = x, y = y, velocidad = veloz))
+    game.addVisual(new ModificadorDeVelocidad(imagen = "placeholders/diana.png", x = x, y = y, velocidad = veloz))
 }
 
     method agregarRelentizador(x, y) {
-    game.addVisual(new ModificadorDeVelocidad(imagen = "placeholders/copito.jpg", x = x, y = y, velocidad = lento))
+    game.addVisual(new ModificadorDeVelocidad(imagen = "placeholders/tuca.png", x = x, y = y, velocidad = lento))
 }
 }
 

@@ -41,8 +41,8 @@ describe "movimiento del helado" {
 }
 
 describe "funcionamiento de los PowerUps" {
-  const acelerador = new ModificadorDeVelocidad(imagen = "placeholders/diesel.jpg", x = 3, y = 3, velocidad = veloz)
-  const relentizador = new ModificadorDeVelocidad(imagen = "placeholders/copito.jpg", x = 4, y = 4, velocidad = lento)
+  const acelerador = new ModificadorDeVelocidad(imagen = "placeholders/diana.png", x = 3, y = 3, velocidad = veloz)
+  const relentizador = new ModificadorDeVelocidad(imagen = "placeholders/tuca.png", x = 4, y = 4, velocidad = lento)
 
   test "cuando un powerUp recibe un choque del helado desaparece" {
     game.addVisual(acelerador)
