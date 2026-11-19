@@ -1,11 +1,30 @@
 import wollok.game.*
 
-import example.pepita
+import enemigos.*
+import manejadores.*
+import frutas.*
+import powerUps.*
+import extras.*
+import helado.*
+import direcciones.*
+import velocidades.*
+import hielos.*
 
-program PepitaGame {
-	game.title("Pepita")
-	game.height(10)
-	game.width(10)
+program juego {
 
+	game.cellSize(100)
+	game.title("Bad Objects")
+	game.height(15)
+	game.width(15)
+	game.boardGround("placeholders/suelo.jpg")
+	
+
+	const musica = game.sound("placeholders/badObjects.mp3")
+	musica.shouldLoop(true)
+	game.schedule(500, { musica.play()} )
+
+	menuInicio.mostrar()
+	
 	game.start()
 }
+ 
