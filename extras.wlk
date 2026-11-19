@@ -27,7 +27,7 @@ object cantFrut inherits Ornamental {
   method text() = "Frutas Comidas: " + configuracion.nivelActual().frutasComidas() + "/" + configuracion.nivelActual().totalFrutas()
 }
 
-// las paredes las pasamos a clases asi creamos muchas asl crear niveles (queda ifual solo ponemos class)
+// las paredes las pasamos a clases asi creamos muchas al crear niveles (queda igual solo ponemos class)
 class Pared inherits Ornamental {
   const property position
   method image() = "placeholders/pared.jpg"

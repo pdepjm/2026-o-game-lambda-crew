@@ -70,7 +70,7 @@ class Kiwi inherits Fruta {
     movimiento.movete()
     position = movimiento.position()   // sincronizo mi posición con la del recorrido
     //aviso a la celda q me moví 
-      //basicamente es para que el hielo de ahí no quede con la imagen congelada de un kiwi que ya no está
+    //basicamente es para que el hielo de ahí no quede con la imagen congelada de un kiwi que ya no está
     self.actualizarCongelamiento()
     manejadorDeHielo.refrescarEn(anterior)
   }

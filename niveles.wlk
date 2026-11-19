@@ -42,15 +42,15 @@ class Nivel {
     method dibujarMapa(){
         var y = game.height() - 1
 
-        //Usamos el foreach de mate con las frutas para recorrer todo el mapa 
-        //En cada columna en y recorremos la fila en x 
-        //aplicamos el metodo decode en cada celda que van a entender todos los objetos gracias al POLIMORFISMO 
+        /*Usamos el foreach de mate con las frutas para recorrer todo el mapa 
+        En cada columna en y recorremos la fila en x 
+        aplicamos el metodo decode en cada celda que van a entender todos los objetos gracias al POLIMORFISMO 
+        */
+
         initialGridMap.forEach({fila => var x = 0 fila.forEach({celda => celda.decode(x, y, self) x += 1 }) y -= 1 })
     }
 
     //Como las paredes se crean por nivel lo ponemos aca 
-    //quizas dsp hay que pasarlo a un generador de paredes o algo asi 
-
     method agregarPared(x, y) {
         const pared = new Pared(position = game.at(x, y))
         game.addVisual(pared)
@@ -58,10 +58,10 @@ class Nivel {
     }
 
 
-    //============ FASES DE FRUTAS ===================
-    //aca ponemos todo lo q refiera a la generacion de frutas x nivel 
-    //con fase queremos decir FASE 1 frambuesas y FASE 2 uvas por ej 
-
+    /* ============ FASES DE FRUTAS ===================
+    aca ponemos todo lo q refiera a la generacion de frutas x nivel 
+    con fase queremos decir FASE 1 frambuesas y FASE 2 uvas por ej 
+    */
     method agregarFrambuesa(x, y) {
         const fruta = new Frambuesa(position = game.at(x, y))
         todasLasFrutas.add(fruta)
@@ -93,7 +93,7 @@ class Nivel {
             fruta.actualizarCongelamiento()
         }
     }
-    //Muestra solo las acitvas
+    //Muestra solo las activas
     method mostrarFruta(fruta) {
         game.addVisual(fruta)
         frutasActivas.add(fruta)
@@ -141,7 +141,7 @@ class Nivel {
 
     method avanzarFase() {
         if (frutasEnEspera.isEmpty()) {
-            game.schedule(100, { configuracion.nivelCompletado() })  // no quedan fases: siguiente nivel (ahora le puse que vaya al menu)
+            game.schedule(100, { configuracion.nivelCompletado() })  // no quedan fases: siguiente nivel
         } else {
             totalXFase = 0
             frutasEnEspera.forEach({ fruta => self.mostrarFruta(fruta) })
@@ -182,7 +182,7 @@ class Nivel {
 }
 }
 
-// ---------- Celdas (todas polimórficas jsjs: entienden decode) ----------
+// ================ Celdas (todas polimórficas: entienden decode) ================
 
 //Creador de suelo
 object _ {
@@ -244,7 +244,7 @@ object l { //relentizador
 }
 
 
-//================== NIVELEEEEES =========================
+//================== NIVELES =========================
 
 object nivel1 inherits Nivel(
     initialGridMap = [

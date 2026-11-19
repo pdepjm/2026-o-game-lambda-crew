@@ -16,6 +16,7 @@ import velocidades.*
     
     test "cuando la fruta recibe un choque del helado desaparece" {
       const fruta = new Frambuesa (position = game.at(1,1))
+      game.addVisual(fruta)
       fruta.recibirChoqueDe(helado)
       assert.equals(0, game.getObjectsIn(fruta.position()).size())
     }

@@ -9,24 +9,15 @@ import hielos.*
 
 object configuracion {
   var nivelActual = nivel1
-  var generacion = 0
   method nivelActual() = nivelActual
 
-  // como game.schedule, pero no hace nada si mientras tanto se reinició o cambió el nivel
-  method programar(tiempo, accion) {
-    const generacionActual = generacion
-    game.schedule(tiempo, {
-      if (generacion == generacionActual) accion.apply()
-    })
-  }
   method iniciar() {
     nivelActual.iniciar()       // dibuja el mapa y posiciona al helado
     const tick = game.tick(666, { manejadorDeEnemigos.moverEnemigos() }, false)
     const tick2 = game.tick(500, { self.nivelActual().moverFrutas() }, false)
-    generacion += 1
+
 
     game.addVisual(helado)
-    //game.addVisual(p) --> Lo sacamos pq ahora lo hace nivel 
     nivelActual.mostrarIndicadores()
 
 
@@ -40,11 +31,6 @@ object configuracion {
     keyboard.space().onPressDo({ manejadorDeHielo.accionar() })
 
     game.onCollideDo(helado, {elemento => elemento.recibirChoqueDe(helado)})
-
-    
-    // TEMPORAL, solo para probar q el nivel 2 se gebere bueb 
-    //dsp vemos como hacer para que se genere al comer todas las frutas
-      // creo que con meter pasar de nivel al creador de las frutas funca 
     keyboard.n().onPressDo({ self.pasarDeNivel() })
     keyboard.v().onPressDo({ self.volverAEmpezar() })
   }
@@ -70,7 +56,7 @@ object configuracion {
 }
 
 
-//====== MENUUUU =======
+//====== MENU =======
 object imagenMenu {
   method position() = game.origin()
   method image() = "placeholders/menu.png"
@@ -97,7 +83,7 @@ object imagenContinuar {
 object pantallaContinuar {
   method mostrar() {
     game.addVisual(imagenContinuar)
-    game.addVisual(puntaje)      // Puse para que muestre los puntos como antes, si quieren lo sacamos
+    game.addVisual(puntaje)
     keyboard.enter().onPressDo({ configuracion.pasarDeNivel() })
   }
 }
@@ -120,17 +106,17 @@ object manejadorDeEnemigos {
     }
 
 }
-object textoGameOver {
+object textoGameOver inherits Ornamental {
   method position() = game.at(4, 7)
   method image() = "placeholders/gameOver.png"
 }
 
-object textoReintentar {
+object textoReintentar inherits Ornamental{
   method position() = game.at(4, 6)
   method image() = "placeholders/reintentar.png"
 }
 
-object cartelReintentar {
+object cartelReintentar inherits Ornamental {
   method mostrar() {
     game.addVisual(textoGameOver)
     game.addVisual(textoReintentar)

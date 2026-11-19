@@ -76,8 +76,9 @@ class EnemigoPerseguidor {
             .findOrDefault({ destino => self.puedeIrA(destino) }, position)
     }
 
-    // Devuelve las direcciones que acercan al helado, la del eje más lejano primero.
-    // Si la primera está bloqueada, prueba la segunda: así no se traba contra una pared.
+    /* Devuelve las direcciones que acercan al helado, la del eje más lejano primero.
+     Si la primera está bloqueada, prueba la segunda: así no se traba contra una pared.
+    */
     method direccionesHaciaHelado() {
         const dx = helado.position().x() - position.x()
         const dy = helado.position().y() - position.y()
